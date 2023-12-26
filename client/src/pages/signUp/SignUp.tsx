@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { Box, Container } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { InputPassword } from '../../components/passwordInput/Password';
+import { toast } from "react-toastify";
 
 const SignUp = () => {
     const [userName, setUserName] = useState('');
@@ -12,13 +13,18 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     const handleSignUp = async () => {
-
         try {
             if (!userName || !password) {
-                throw new Error("Please fill all fileds")
+                toast.info("Please fill all fileds")
+                return;
             }
             const response = await axios.post('http://localhost:3000/API/users/register', { userName, password })
-            console.log('response:', response.data);
+
+            if(response.data.error === "User already exist"){
+                toast.error("User with this name already exists")
+                return;
+            }
+            toast.success('Registration successful')
             handleLogin()
 
         } catch (error) {
