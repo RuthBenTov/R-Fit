@@ -5,13 +5,18 @@ const SignIn = () => {
   const [textUserName, setUserName] = useState("");
   const [textPassword, setPassword] = useState("");
 
-  async function handleSignIn(userName: string, password: string) {
-    try {
-      const { data } = await axios.post(
-        "http://localhost:3000/API/users/login",
-        { userName, password }
-      );
-
+    async function handleSignIn (userName:string, password:string){
+      try {
+      
+        const {data} = await axios.post("http://localhost:3000/API/users/login" , {userName, password})
+        
+        if(data === "OK")
+        console.log(userName +  password +"-------success")
+        
+      } catch (error) {
+        console.error(error)
+      }
+    }
       if (data === "OK") console.log(userName + password + "-------success");
     } catch (error) {
       console.error(error);
