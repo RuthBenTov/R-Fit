@@ -1,4 +1,6 @@
+
 import { users, User } from "./usersModel";
+
 
 export const login = async (req: any, res: any) => {
   try {
