@@ -8,7 +8,7 @@ const SignIn = () => {
     async function handleSignIn (userName:string, password:string){
       try {
       
-        const {data} = await axios.post("/API/users/add-user" , {userName, password})
+        const {data} = await axios.post("http://localhost:3000/API/users/login" , {userName, password})
         
         if(data === "OK")
         console.log(userName +  password +"-------success")
