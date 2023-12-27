@@ -1,10 +1,11 @@
 import express from 'express';
-import { addUser } from './usersCtrl';
+import { login,register } from './usersCtrl';
 
 const router = express.Router();
 
 router
-    .get("/add-user", addUser)
+    .get("/login", login)
+    .post("/register", register)
 
 
 export default router
