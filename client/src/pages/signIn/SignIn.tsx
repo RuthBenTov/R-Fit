@@ -17,7 +17,7 @@ const SignIn = () => {
       );
       if (data.process === "OK") {
         console.log(userName + password + "---success");
-        navigate("/");
+        navigate("/logbook");
       }
     } catch (error) {
       console.error(error);

@@ -12,5 +12,4 @@ export const router = createBrowserRouter([
   {path: "/logbook", element: <Logbook />},
   {path: "/manager-calender", element: <ManagerPage/>}, 
   {path: "/profile", element: <ProfilePage /> }
-
 ]);
