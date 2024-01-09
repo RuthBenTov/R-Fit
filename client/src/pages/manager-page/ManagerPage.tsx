@@ -55,7 +55,7 @@ const ManagerPage = () => {
     const newEvent: EventInput = {
       title: `${formData.trainingName}`,
       start: `${formData.date}T${formData.timeStart}`,
-      end: `${formData.date}T${"23:00:00"}`,
+      end: `${formData.date}T${formData.timeStart}`,
       duration: { minutes: formData.duration },
       daysOfWeek: [new Date(formData.date).getDay()],
       recurring: formData.isRegular,
