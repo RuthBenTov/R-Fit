@@ -5,12 +5,12 @@ import Schedule from './pages/schedule/Schedule';
 
 function App() {
 
-  // return <RouterProvider router={router} />
-  return(
-    <>
-    <Schedule />
-    </>
-  )
+  return <RouterProvider router={router} />
+  // return(
+  //   <>
+  //   <Schedule />
+  //   </>
+  // )
 
 }
 

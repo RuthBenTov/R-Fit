@@ -40,6 +40,13 @@ const ManagerPage = () => {
       timeStart: "15:00:00",
       timeEnd: "17:00:00",
     },
+    {
+      title: 'Meeting',
+      start: '2024-01-09T09:00:00', // תאריך ושעת התחלה
+      end: '2024-01-09T11:30:00', // תאריך ושעת סיום
+      duration: { hours: 2, minutes: 30 }, // משך הזמן של האירוע - 2 שעות ו-30 דקות
+      allDay: false, // אירוע לא כל היום
+    }
   ]);
 
   function addEvent(event: any) {
@@ -52,17 +59,25 @@ const ManagerPage = () => {
       duration: parseInt(event.target.duration.value),
       isRegular: event.target.isRegular.checked,
     };
-    const newEvent: EventInput = {
+    console.log(formData.timeStart)
+    const newEvent: EventInput = formData.isRegular?{
       title: `${formData.trainingName}`,
-      start: `${formData.date}T${formData.timeStart}`,
+      startTime: `${formData.date}T${formData.timeStart}`,
       end: `${formData.date}T${formData.timeStart}`,
-      duration: { minutes: formData.duration },
+      duration: { hours: 0, minutes: formData.duration },
+      allDay: false,
+    }:{
+      title: `${formData.trainingName}`,
+      startTime: `${formData.date}T${formData.timeStart}`,
+      end: `${formData.date}T${formData.timeStart}`,
+      duration: { hours: 0, minutes: formData.duration },
+      allDay: false,
       daysOfWeek: [new Date(formData.date).getDay()],
       recurring: formData.isRegular,
       rrule: {
         freq: "weekly",
       },
-    };
+    }
 
     console.log(events);
 
