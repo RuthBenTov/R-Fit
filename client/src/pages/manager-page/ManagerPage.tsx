@@ -13,6 +13,7 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import { duration } from "@mui/material";
 import { getThisDate } from "../../assets/functions";
 import "./managerPaseStyle.scss";
+import { addEventDb } from "../../API/eventCtrl";
 
 interface TrainingTable {
   training_id: number;
@@ -65,9 +66,7 @@ const ManagerPage = () => {
       ? {
           title: `${formData.trainingName}`,
           start: `${formData.date}T${formData.timeStart}:00`,
-          // end: `${formData.date}T${formData.timeStart}`,
           duration: { minutes: formData.duration },
-          // allDay: false,
         }
       : {
           title: `${formData.trainingName}`,
@@ -79,9 +78,8 @@ const ManagerPage = () => {
           daysOfWeek: [new Date(formData.date).getDay()],
           recurring: formData.isRecurring,
         };
-    console.log(newEvent.start);
-    console.log(events);
 
+        addEventDb(formData);
     setEvents((prev) => [...prev, newEvent]);
   }
   return (
