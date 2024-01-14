@@ -1,42 +1,50 @@
 import { Box, Button, Container, TextField } from "@mui/material";
-import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
+import './signIn.scss';
 import { InputPassword } from "../../components/passwordInput/Password";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../api/userApi";
+import AppBarProps from "../../components/appbar/AppBar";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [textUserName, setUserName] = useState("");
-  const [textPassword, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
-  async function handleSignIn(userName: string, password: string) {
+  async function handleSignIn() {
     try {
-      const { data } = await axios.post(
-        "http://localhost:3000/API/users/login",
-        { userName, password }
-      );
-      if (data.process === "OK") {
-        console.log(userName + password + "---success");
-        navigate("/logbook");
+      const response = await login(userName, password)
+
+      if (response?.data.ok) {
+        console.log('Login successful');
+        navigate("/logbook")
+      } else {
+        console.error('Login failed:', response?.data.error)
       }
     } catch (error) {
-      console.error(error);
+      console.error('Error during login:', error);
     }
   }
 
   return (
-    <div>
+    <div className="signIn">
+      <AppBarProps />
       <Container
         sx={{
           padding: "0px 4px 35px 3px",
           border: "1px solid gray",
           borderRadius: "12px",
+          marginTop:"70px",
+          backgroundColor: "rgba(255, 255, 255, 0.4)",
+          textAlign: "center"
         }}
       >
         <h2
-          style={{ color: "#6467d4", marginBottom: "35px", fontSize: "25px" }}
+          style={{ color: "#54a23c", marginBottom: "35px", fontSize: "45px",fontWeight:"bolder",
+          letterSpacing: ".15em",
+          textShadow: "-3px 6px 1px black"}}
         >
-          SignIn
+          Sign in
         </h2>
         <Box sx={{ width: "100%" }}>
           <TextField
@@ -45,7 +53,7 @@ const SignIn = () => {
             fullWidth
             type="text"
             size="small"
-            value={textUserName}
+            value={userName}
             placeholder="User name"
             onChange={(ev) => {
               setUserName(ev.target.value);
@@ -58,12 +66,12 @@ const SignIn = () => {
           />
           <Button
             onClick={() => {
-              handleSignIn(textUserName, textPassword);
+              handleSignIn();
             }}
             size="small"
             variant="contained"
             type="submit"
-            sx={{ backgroundColor: "#6467d4", color: "white", padding: "10px" }}
+            sx={{ backgroundColor: "#54a23c", color: "black", padding: "10px" }}
           >
             Login
           </Button>
@@ -71,7 +79,7 @@ const SignIn = () => {
             style={{
               paddingBottom: "150px",
               textAlign: "center",
-              color: "gray",
+            
             }}
           >
             Forget your password?
@@ -81,8 +89,8 @@ const SignIn = () => {
               navigate("/sign-up");
             }}
             size="small"
-            sx={{ color: "#6467d4" }}
-            variant="outlined"
+            sx={{ backgroundColor: "#54a23c",color:"black" }}
+            variant="contained"
           >
             Sign Up
           </Button>
@@ -93,3 +101,4 @@ const SignIn = () => {
 };
 
 export default SignIn;
+

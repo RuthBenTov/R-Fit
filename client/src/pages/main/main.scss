@@ -1,0 +1,52 @@
+.main{
+    background: url("https://media.istockphoto.com/id/1360022908/photo/weightlifter-clapping-hands-and-preparing-for-workout-at-a-gym.jpg?s=2048x2048&w=is&k=20&c=MJPbrvrSmSvs2JviZ7uqWbW96IZ4G8uhCPWZWE_7W2U=");
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    position: relative;
+
+    .visible{
+        opacity: 1;
+        left:0;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .hidden{
+        opacity: 0;
+        left: -100%;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .content{
+        position: absolute;
+        left: 0;
+    }
+    .button-content{
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 200px;
+    }
+
+    h1 {
+        width: 70px;
+        font-size: 100px;
+        padding: 50px;
+        letter-spacing: .15em;
+        text-shadow: -3px 6px 1px black;
+
+     span{
+        color: 
+        #54a23c;
+    }
+}
+p{
+    width: 450px;
+    font-size: 20px;
+    padding: 50px;
+    letter-spacing: .15em;
+    text-shadow: -2px 2px 0px black;
+}
+
+}
+

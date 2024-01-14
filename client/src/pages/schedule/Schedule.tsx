@@ -5,9 +5,78 @@ import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
-import React from 'react'
+import React, { useState } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import { DatePicker } from '@mui/x-date-pickers';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { Grid, Paper, Tab, Tabs, Typography } from "@mui/material";
+
+
+// const Schedule = () => {
+//   const [value, setValue] = React.useState(0);
+//   const [selectedHour, setSelectedHour] = React.useState(null);
+
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//     setSelectedHour(null);
+//   };
+
+//   const handleHourClick = (hour) => {
+//     setSelectedHour(hour);
+//   };
+
+//   const renderHourTool = () => (
+//     <Paper style={{ padding: '10px' }}>
+//       <Typography variant="h6"></Typography>
+//       {[8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19].map((hour) => (
+//         <Typography key={hour} onClick={() => handleHourClick(hour)}>
+//           {hour}:00
+//         </Typography>
+//       ))}
+//     </Paper>
+//   );
+
+//   const renderHourCard = () => (
+//     <Card>
+//       <CardContent>
+//         <Typography variant="h6">{selectedHour}:00 - {selectedHour + 1}:00</Typography>
+//         <Typography>Coach: John Doe</Typography>
+//         <Typography>Participants: 5</Typography>
+//       </CardContent>
+//     </Card>
+//   );
+
+//   return (
+//     <div>
+//       <Tabs value={value} onChange={handleChange}>
+//         <Tab label="Sunday" />
+//         <Tab label="Monday" />
+//         <Tab label="Tuesday" />
+//         <Tab label="Wednesday" />
+//         <Tab label="Thursday" />
+//         <Tab label="Friday" />
+//         <Tab label="Saturday" />
+//       </Tabs>
+
+//       <Grid container spacing={2}>
+//         <Grid item xs={2}>
+//           {renderHourTool()}
+//         </Grid>
+
+//         <Grid item xs={10}>
+//           <Paper style={{ padding: '10px' }}>
+//             <Typography variant="h6">Selected Day: {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][value]}</Typography>
+//             {selectedHour && renderHourCard()}
+//           </Paper>
+//         </Grid>
+//       </Grid>
+//     </div>
+//   );
+// }
+
+// export default Schedule
 
 const Schedule = () => {
   const events = [
