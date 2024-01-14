@@ -1,0 +1,91 @@
+.profilePageDiv {
+  width: 100vw;
+  height: 100%;
+  padding: 3rem;
+  background-color: gray;
+  display: flex;
+  justify-content: space-around;
+  .userInfoDiv {
+    background-color: antiquewhite;
+    border: 1px solid gray;
+    border-radius: 30px;
+    box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.141);
+    padding: 1rem;
+    img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin: 1rem;
+    }
+    .userInfoItem {
+      display: flex;
+      padding: 15px;
+      p {
+        padding: 0px 15px;
+      }
+    }
+  }
+  .userHistory {
+    padding: 1rem;
+    text-align: left;
+    display: flex;
+    .lastTrainings,
+    .nextTrainings {
+      height: 80vh;
+      overflow-y: scroll;
+      margin: 10px;
+      background-color: #454545;
+      padding: 15px;
+      border-radius: 30px;
+      h3 {
+        color: white;
+      }
+
+      .training {
+        background-color: bisque;
+        padding: 1rem;
+        border-radius: 12px;
+        border: 1px solid gray;
+
+        box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.141);
+        margin: 0.5rem;
+
+        .trainingInfo {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+/* סקרול בר עיצוב יפה וקלאסי */
+
+/* עיצוב כללי */
+::-webkit-scrollbar {
+  width: 12px; /* רוחב סרוק בר */
+  border-radius: 20px;
+}
+
+/* Track (רקע הסרול בר) */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* רקע סרוק בר */
+    border-radius: 20px;
+}
+
+/* Handle (החלק המתפרצת בסרול בר) */
+::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: #585858; /* צבע הסרול בר עצמו */
+}
+
+/* פינות עגולות בחלק העליון של הסרול בר */
+::-webkit-scrollbar-thumb:hover {
+    border-radius: 20px;
+  background: #555; /* צבע הסרול בר עצמו בעת הרחקת עכבר מעליו */
+}
+
+/* צבע הסרול בר כאשר הקלט מתבצע */
+::-webkit-scrollbar-thumb:active {
+  background: #555; /* צבע הסרול בר עצמו כאשר נלחץ עליו */
+}
