@@ -5,7 +5,7 @@ import { Box, Container } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { InputPassword } from '../../components/passwordInput/Password';
 import { toast } from "react-toastify";
-import { register } from '../../api/userApi'
+import { register } from '../../API/userApi'
 import './signUp.scss'
 import AppBarProps from '../../components/appbar/AppBar';
 

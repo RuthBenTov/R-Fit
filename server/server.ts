@@ -21,9 +21,9 @@ app.use(cookieParser())
 app.use("/API/MySql", mySqlRouter )
 
 import userRoutes from "./API/usersAPI/usersRoutes"
-app.use("/api/v1/users", userRoutes)
+app.use("/API/users", userRoutes)
 
-app.use("/API/users", usersRouter);
+// app.use("/API/users", usersRouter);
 app.use("/API/events", eventRouts);
 
 

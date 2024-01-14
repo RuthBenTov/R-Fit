@@ -3,8 +3,9 @@ import { useState } from "react";
 import './signIn.scss';
 import { InputPassword } from "../../components/passwordInput/Password";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/userApi";
 import AppBarProps from "../../components/appbar/AppBar";
+import { login } from "../../API/userApi";
+
 
 const SignIn = () => {
   const navigate = useNavigate();

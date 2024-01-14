@@ -6,6 +6,7 @@ import Logbook from '../pages/logbook/Logbook';
 import ProfilePage from '../pages/profile/ProfilePage';
 import ManagerPage from '../pages/manager-page/ManagerPage';
 import Main from '../pages/main/Main';
+import MyCalendar from '../pages/manager-page/MyCalendar';
 
 export const router = createBrowserRouter([
 
