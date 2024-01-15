@@ -24,7 +24,7 @@ export async function addEvent(req, res) {
         res.send({ ok: false, result: "no changes found" });
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).send({ ok: false, error });
       }
     });
