@@ -1,3 +1,8 @@
+import axios from "axios";
+import { users } from "./../../../server/API/Users/usersModel";
+import { User } from "./../../../server/API/usersAPI/usersModel";
+import { Cookie } from "@mui/icons-material";
+
 export const getThisDate = () => {
   const today: Date = new Date();
 
@@ -13,4 +18,15 @@ export const getThisDate = () => {
   }
   const formattedDate: string = `${year}-${month}-${day}`;
   return formattedDate;
+};
+
+export const getUserFromCookie = async () => {
+  try {
+    const { data } = await axios("API/users/getUserByCookies");
+    if (!data) throw new Error("Couldn't get user");
+    return data.user;
+  } catch (error) {
+    return null;
+    console.error(error);
+  }
 };

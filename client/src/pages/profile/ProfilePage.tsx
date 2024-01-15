@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa6";
 import { FaFlagCheckered } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
 import "./profilePage.scss";
+import { getUserFromCookie } from "../../assets/functions";
 
 const ProfilePage = () => {
+  const [user, setUser] = useState<{name:string, email:string, phone_number:string, date_of_birth:string  }  | null>(null);
+  // const [lastEvent, setLastEvent] = useState()
+  // const [nextEvent, setNextEvent] = useState()
+  
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userFromCookie = await getUserFromCookie();
+        setUser(userFromCookie);
+      } catch (error) {
+        console.error('Error fetching user from cookie:', error);
+      }
+    };
+
+    fetchData();
+  }, []); // Passing an empty dependency array means this effect will run once when the component mounts
+
   return (
     <div className="profilePageDiv">
       <div className="userInfoDiv">
@@ -15,13 +34,17 @@ const ProfilePage = () => {
           />
 
           <div className="userInfo">
-            <h3>Ruth Ben Tov</h3>
+            <h3>{user?.name}</h3>
             <div className="userEmail userInfoItem">
-              <p>Email: rut50@gmail.com</p>
+              <p>Email: {user?.email}</p>
               <FaPen />
             </div>
             <div className="userBirthDay userInfoItem">
-              <p>Birth Day: 12-12-2012</p>
+              <p>Birthday: {user?.date_of_birth.substring(0, 10)}</p>
+              <FaPen />
+            </div>
+            <div className="userPhone userInfoItem">
+              <p>Phone: {user?.phone_number}</p>
               <FaPen />
             </div>
           </div>
