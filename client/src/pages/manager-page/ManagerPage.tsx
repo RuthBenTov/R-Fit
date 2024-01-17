@@ -14,6 +14,9 @@ import { duration } from "@mui/material";
 import { getThisDate } from "../../assets/functions";
 import "./managerPaseStyle.scss";
 import { addEventDb } from "../../API/eventCtrl";
+import { getUserEventsAPI } from "../../API/userApi";
+import { setUserEvents } from "../../features/actions/eventSlice";
+import { useDispatch } from "react-redux";
 
 interface TrainingTable {
   training_id: number;
@@ -27,29 +30,9 @@ interface TrainingTable {
 }
 
 const ManagerPage = () => {
+  const dispatch = useDispatch();
   const [isRecurClicked, setIsRecurClicked] = useState(false);
-  const [events, setEvents] = useState<EventInput[]>([
-    {
-      title: "Ruth And Daniel", // a property!
-      start: "2024-01-07T16:00:00", // a property!
-      end: "2024-01-07T17:00:00", // a property! ** see important note below about 'end' **
-      recurring: true,
-    },
-    {
-      title: "Ruth01", // a property!
-      start: "2024-01-07T10:00:00", // a property!
-      end: "2024-01-07T09:00:00", // a property! ** see important note below about 'end' **
-    },
-    {
-      title: "Meeting",
-      start: "2024-01-09T09:00:00", // תאריך ושעת התחלה
-    },
-    {
-      title: "אירוע 45 דקות",
-      start: "2024-01-23T09:00:00",
-      duration: "00:45:00",
-    },
-  ]);
+  const [events, setEvents] = useState<EventInput[]>([]);
 
   function addEvent(event: any) {
     event.preventDefault();
@@ -79,7 +62,14 @@ const ManagerPage = () => {
           recurring: formData.isRecurring,
         };
 
-        addEventDb(formData);
+        addEventDb(formData)
+        .then((data)=>{
+          if(data.ok){
+            dispatch(getUserEventsAPI(user_Id))
+          }
+        })
+        .catch((error)=> console.error(error));
+      
     setEvents((prev) => [...prev, newEvent]);
   }
   return (

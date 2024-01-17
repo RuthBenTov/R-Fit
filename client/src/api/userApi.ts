@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
 
 export const register = async(user:{userName:string, password:string, email:string, birthday:string, phone:string, name:string})=>{
     try {
@@ -19,3 +21,20 @@ export const login = async (userName:string, password: string)=>{
         console.error(error)
     }
 }
+
+
+export const getUserEventsAPI = createAsyncThunk("events/fetchEvents", async(userId:number)=>{
+    try {
+        const {data} = await axios.get(`/user/events?userId=${userId}`);
+        if(!data) throw new Error("No data in getUserEventsApi");
+        return data.events;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+})
+
+
+export const fetchUserId = createAsyncThunk("user/fetchUserId", async(_, {dispatch})=>{
+    
+})
