@@ -1,5 +1,7 @@
 import connection from "../../DB/database";
 import { Event } from "./eventModel";
+
+
 export async function addEvent(req, res) {
   try {
     const { eventDb } = req.body;

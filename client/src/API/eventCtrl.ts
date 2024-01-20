@@ -1,4 +1,5 @@
 import axios  from 'axios';
+
 export async function addEventDb(eventDb: { trainingName: any; trainer: any; date: any; timeStart: any; duration: number; isRecurring: any; }) {
   try {
     console.log(eventDb)

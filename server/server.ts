@@ -6,6 +6,7 @@ import dotenv from "dotenv"
 import mySqlRouter from "./API/DatabaseCreation/mySqlRouters"
 import cookieParser from 'cookie-parser'
 import eventRouts from "./API/Events/eventRouts";
+import userRoutes from "./API/usersAPI/usersRoutes"
 
 
 dotenv.config()
@@ -20,7 +21,6 @@ app.use(cookieParser())
 
 app.use("/API/MySql", mySqlRouter )
 
-import userRoutes from "./API/usersAPI/usersRoutes"
 app.use("/API/users", userRoutes)
 
 // app.use("/API/users", usersRouter);
