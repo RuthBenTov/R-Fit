@@ -5,7 +5,7 @@ const SearchOptions = () => {
   const [trainer, setTrainer] = useState('');
 
   const trainingNameOptions = ['Lila', 'Ruth', 'Daniel', 'Lola'];
-  const trainerOptions = ['Yoga', 'Pilates', 'Wod', 'Box'];
+  const trainerOptions = ['Yoga', 'Pilates', 'Wod', 'Boxing'];
 
   const filteredTrainingNameOptions = trainingNameOptions.filter((option) =>
     option.toLowerCase().includes(trainingName.toLowerCase())
@@ -23,6 +23,7 @@ const SearchOptions = () => {
           id="trainingName"
           placeholder="Training Name"
           onChange={(e) => setTrainingName(e.target.value)}
+          style={{ color: 'black' }}
         />
        <datalist id="trainingNames">
           {filteredTrainingNameOptions.map((option) => (

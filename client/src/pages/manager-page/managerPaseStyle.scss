@@ -26,12 +26,12 @@ $gray: #8e8e91;
     background-color: $blackBlue;
     width: 100vw;
     height: 100vh;
-    color: $gray;
+    color: black;
     border-color: $gray !important;
     button {
       background-color: $green;
       border: 1px solid $gray;
-      color: blue;
+      color: black;
     }
   }
 }
@@ -48,10 +48,10 @@ $gray: #8e8e91;
   margin: 1rem;
   height: 92%;
   text-align: left;
+
   input {
     border: none;
     border-radius: 3px;
-    margin: px;
     padding: 3px;
     background-color: $gray;
     width: 170px;

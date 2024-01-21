@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { register } from "../../API/userApi";
 import "./signUp.scss";
 import AppBarProps from "../../components/appbar/AppBar";
-import { DateField } from "@mui/x-date-pickers";
 
 const SignUp = () => {
   const [userName, setUserName] = useState<string>("");
@@ -32,7 +31,6 @@ const SignUp = () => {
       }
       const newUser = {userName, password, email, birthday, phone, name};
       const response = await register(newUser);
-      console.log("the response", response);
 
       if (response && response.data.results[0]) {
         if (response.data.results[0].error === "User already exist") {
@@ -113,7 +111,6 @@ const SignUp = () => {
             size="small"
             label="Date of birth"
             value={birthday}
-            // placeholder="Date Of Birth"
             onChange={(ev) => setBirthday(ev.target.value)}
           />
           <TextField
@@ -147,7 +144,6 @@ const SignUp = () => {
             sx={{
               backgroundColor: "#413b2b",
               color: "white",
-              //   marginBottom: "30px",
             }}
           >
             Signup

@@ -14,11 +14,6 @@ export const router = createBrowserRouter([
   { path: "/", element: <Main /> },
   { path: "/sign-in", element: <SignIn /> },
   { path: "/sign-up", element: <SignUp /> },
-
-  { path: "/signin", element: <SignIn /> },
-  { path: "/signup", element: <SignUp /> },
-  
-
   { path: "/schedule", element: <Schedule /> },
   { path: "/manager-calender", element: <ManagerPage /> },
   { path: "/myCalendar", element: <MyCalendar /> },
