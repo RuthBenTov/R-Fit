@@ -153,3 +153,43 @@ export async function updateUser(req, res) {
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+export async function isAdmin(req, res, next) {
+  try {
+    const token = req.cookies.user;
+    if (!token) {
+      console.error("No token provided");
+      return res.status(401).send({ ok: false, error: "Unauthorized" });
+    }
+
+    const cookie = jwt.decode(token, secret);
+    const query = `SELECT * FROM r_fit.users WHERE user_id=${cookie.userID}`;
+
+    connection.query(query, (err, results) => {
+      try {
+        if (err) throw err;
+
+        const user = results[0];
+
+        if (!user) {
+          console.error("User not found");
+          return res.status(401).send({ ok: false, error: "Unauthorized" });
+        }
+
+        if (user.role === "admin") {
+          // המשתמש הוא אדמין
+          return next(); // המשך לתהליך הבא
+        } else {
+          console.error("User is not an admin");
+          return res.status(403).send({ ok: false, error: "Forbidden" });
+        }
+      } catch (error) {
+        console.error(error);
+        res.status(500).send({ ok: false, error });
+      }
+    });
+  } catch (error) {
+    console.error("Error in isAdmin:", error);
+    res.status(500).send({ ok: false, error });
+  }
+}

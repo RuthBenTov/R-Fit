@@ -30,3 +30,33 @@
 #root h2{
     color: white;
 }
+
+
+.profileIcon{
+    font-size: 40px;
+    color: rgb(149, 149, 149);
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+.managerCalendarIcon{
+    font-size: 50px;
+    color: rgb(149, 149, 149);
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    padding: 10px;
+    top: 20px;
+    right: 10px;
+
+    &:hover{
+        cursor: pointer;
+    }
+}
