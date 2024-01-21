@@ -5,6 +5,7 @@ const router = express.Router();
 router
 .get("/", getAllEvents)
 .post("/addEvent", addEvent)
-.delete("/removeEventByID/:id", removeEventByID);
+.delete("/removeEventByID/:id", removeEventByID)
+// .get("/getEvents",getEvents)
 
 export default router;

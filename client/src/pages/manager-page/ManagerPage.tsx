@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack config!
-// import { Calendar } from "@fullcalendar/core";
+import "bootstrap-icons/font/bootstrap-icons.css"; 
 import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -18,50 +17,22 @@ import {
   gatAllEventsDb,
   removeEventByID,
 } from "../../API/eventCtrl";
+import "./managerPaseStyle.scss";
+import {  fetchEvents } from "../../API/eventCtrl";
+import { useDispatch } from "react-redux";
 
-interface TrainingTable {
-  training_id: number;
-  traning_name: string;
-  date_time: string;
-  day: string;
-  is_regular: boolean;
-  name_trainer: string;
-  program_training_id: number;
-  duration: number;
-}
 
 const ManagerPage = () => {
+  const dispatch = useDispatch();
   const [isRecurClicked, setIsRecurClicked] = useState(false);
-  const [events, setEvents] = useState<EventInput[]>([
-    // {
-    //   id: "1234556",
-    //   title: "Ruth And Daniel", // a property!
-    //   start: "2024-01-20T16:00:00", // a property!
-    //   end: "2024-01-20T17:00:00", // a property! ** see important note below about 'end' **
-    //   recurring: true,
-    // },
-    // {
-    //   title: "Ruth01", // a property!
-    //   start: "2024-01-07T10:00:00", // a property!
-    //   end: "2024-01-07T09:00:00", // a property! ** see important note below about 'end' **
-    // },
-    // {
-    //   title: "Meeting",
-    //   start: "2024-01-09T09:00:00", // תאריך ושעת התחלה
-    // },
-    {
-      title: "אירוע 45 דקות",
-      start: "2024-01-23T09:00:00",
-      duration: "00:45:00",
-    },
-  ]);
+  const [events, setEvents] = useState<EventInput[]>([]);
 
   const getEvents = async () => {
     try {
       const _events = await gatAllEventsDb();
       const formattedEvents = formateEventToCalendar(_events);
 
-      setEvents((prevEvents) => [...formattedEvents]);
+      setEvents(() => [...formattedEvents]);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
@@ -99,9 +70,21 @@ const ManagerPage = () => {
     //       recurring: formData.isRecurring,
     //     };
 
-    addEventDb(formData);
-    getEvents();
+    // addEventDb(formData);
+    // getEvents();
+
+        addEventDb(formData)
+        .then((data)=>{
+          if(data.ok){
+            dispatch(fetchEvents() as any);
+          }
+        })
+        .catch((error)=> console.error(error));
+      
+    // setEvents((prev) => [...prev, newEvent]);
+    getEvents()
   }
+  
   const removeEvent = (info: EventClickArg) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       const eventId = info.event.id;
@@ -159,7 +142,7 @@ const ManagerPage = () => {
             right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
           }}
           initialDate={getThisDate()}
-          navLinks={true} // can click day/week names to navigate views
+          navLinks={true} 
           editable={true}
           dayHeaderFormat={{ weekday: "short" }}
           initialView="dayGridWeek"

@@ -7,6 +7,7 @@ import ProfilePage from '../pages/profile/ProfilePage';
 import ManagerPage from '../pages/manager-page/ManagerPage';
 import Main from '../pages/main/Main';
 import MyCalendar from '../pages/manager-page/MyCalendar';
+import Schedule from '../pages/schedule/Schedule';
 
 export const router = createBrowserRouter([
 
@@ -17,7 +18,8 @@ export const router = createBrowserRouter([
   { path: "/signin", element: <SignIn /> },
   { path: "/signup", element: <SignUp /> },
   
-  { path: "/logbook", element: <Logbook /> },
+
+  { path: "/schedule", element: <Schedule /> },
   { path: "/manager-calender", element: <ManagerPage /> },
   { path: "/myCalendar", element: <MyCalendar /> },
   { path: "/profile", element: <ProfilePage /> },

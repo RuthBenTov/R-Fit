@@ -90,3 +90,20 @@ export const removeEventByID = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+export async function getEvents(req,res){
+  try {
+    const query = "SELECT name_trainer, training_name, date_time FROM r_fit.training";
+    connection.query(query,(err,results)=>{
+      if(err) throw err;
+      //@ts-ignore
+      const arr = results.map((result) => {
+        return {title : `${result.name_trainer}\n${result.training_name}`, start: result.date_time}
+      }) 
+      res.send({ok:true, events:arr});
+    });
+  } catch (error) {
+    res.status(500).send({ok:false,error});
+  }
+}
+
