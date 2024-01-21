@@ -19,7 +19,9 @@ const Schedule = () => {
 
   return (
     <div className="schedule-container">
+      <div style={{ width:"90%", textAlign:'center',margin:'auto', paddingTop:'2%'}}>
     <Fullcalendar calendarEvents={events as CalendarEvent[]}/>
+    </div>
     </div>
   )
 }
