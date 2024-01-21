@@ -18,7 +18,7 @@ const SignIn = () => {
 
       if (response?.data.ok) {
         console.log('Login successful');
-        navigate("/logbook")
+        navigate("/schedule")
       } else {
         console.error('Login failed:', response?.data.error)
       }

@@ -9,7 +9,6 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import { EventClickArg, EventInput } from "@fullcalendar/core";
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
-import { duration } from "@mui/material";
 import { formateEventToCalendar, getThisDate } from "../../assets/functions";
 import "./managerPaseStyle.scss";
 import {
@@ -20,6 +19,7 @@ import {
 import "./managerPaseStyle.scss";
 import {  fetchEvents } from "../../API/eventCtrl";
 import { useDispatch } from "react-redux";
+import SearchOptions from "../../components/searchOptions copy/SearchOptions";
 
 
 const ManagerPage = () => {
@@ -53,26 +53,6 @@ const ManagerPage = () => {
       isRecurring: event.target.isRecurring.checked,
     };
 
-    // const newEvent: EventInput = !isRecurClicked
-    //   ? {
-    //       title: `${formData.trainingName}`,
-    //       start: `${formData.date}T${formData.timeStart}:00`,
-    //       duration: { minutes: formData.duration },
-    //     }
-    //   : {
-    //       title: `${formData.trainingName}`,
-    //       start: `${formData.date}T${formData.timeStart}:00`,
-    //       startTime: `${formData.timeStart}:00`,
-    //       endTime: `${formData.timeStart}:00`,
-    //       duration: { minutes: formData.duration },
-    //       allDay: false,
-    //       daysOfWeek: [new Date(formData.date).getDay()],
-    //       recurring: formData.isRecurring,
-    //     };
-
-    // addEventDb(formData);
-    // getEvents();
-
         addEventDb(formData)
         .then((data)=>{
           if(data.ok){
@@ -80,9 +60,7 @@ const ManagerPage = () => {
           }
         })
         .catch((error)=> console.error(error));
-      
-    // setEvents((prev) => [...prev, newEvent]);
-    getEvents()
+        getEvents()
   }
   
   const removeEvent = (info: EventClickArg) => {
@@ -95,14 +73,8 @@ const ManagerPage = () => {
   return (
     <div className="ManagerPageDiv">
       <form className="addEventForm box" onSubmit={(ev) => addEvent(ev)}>
-        <h2>Manager Page</h2>
-        <input
-          type="text"
-          name="trainingName"
-          id="trainingName"
-          placeholder="Training Name"
-        />
-        <input type="text" name="trainer" id="trainer" placeholder="Trainer" />
+        <h2 style={{color:"#43684d", fontWeight: "bolder",textShadow: "rgb(203 194 156) 1px 0px 10px"}}>Manager Page</h2>
+        <SearchOptions />
         <input type="date" name="date" id="date" />
         <input type="time" name="timeStart" id="timeStart" />
         <label htmlFor="isRecurring">is recurring?</label>
