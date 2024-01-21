@@ -5,6 +5,7 @@ import { CalendarEvent, actionSelector } from "../../features/actions/eventSlice
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchEvents } from "../../API/eventCtrl";
 import Fullcalendar from "../../components/fullcalendar/Fullcalendar";
+import './scss/schedule.scss'
 
 
 const Schedule = () => {
@@ -17,9 +18,9 @@ const Schedule = () => {
 
 
   return (
-    <>
+    <div className="schedule-container">
     <Fullcalendar calendarEvents={events as CalendarEvent[]}/>
-    </>
+    </div>
   )
 }
 

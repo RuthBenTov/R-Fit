@@ -1,4 +1,5 @@
-import { calendarEvent } from "../../../API/eventCtrl";
+import { calendarEvent } from "../../../API/eventModel";
+
 
 export interface FullcalendarProps {
     calendarEvents: calendarEvent[]; 
