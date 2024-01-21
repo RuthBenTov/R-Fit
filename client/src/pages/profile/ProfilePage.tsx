@@ -5,6 +5,8 @@ import { FaClock } from "react-icons/fa";
 import "./profilePage.scss";
 import { getUserFromCookie } from "../../assets/functions";
 
+
+console.log("say hallo baby!")
 const ProfilePage = () => {
   const [user, setUser] = useState<{
     name: string;
