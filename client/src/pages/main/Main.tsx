@@ -13,11 +13,8 @@ const Main = () => {
 
     const handleTransition = async()=>{
       await new Promise((resolve)=> setTimeout(resolve,500));
-
       setIsVisible(false);
-
       await new Promise((resolve)=> setTimeout(resolve,500));
-  
       navigate("/sign-in");
     };
 

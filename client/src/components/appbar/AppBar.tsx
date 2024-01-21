@@ -10,12 +10,14 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const pages = ['SignIn', 'SignUp'];
-
 const AppBarProps = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
+  const pages = [
+    { name: 'SignIn', path: '/sign-in' },
+    { name: 'SignUp', path: '/sign-up' },
+  ];
 
   return (
     <AppBar position="static" sx={{ backgroundColor: '#1e1e2a' }}>
@@ -36,15 +38,12 @@ const AppBarProps = () => {
             R-FIT
           </Typography>
           <Box sx={{ display: 'flex' }}>
-            <Menu
-              open={Boolean(anchorElNav)}
-            >
+            <Menu open={Boolean(anchorElNav)}>
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => {navigate(`/${page.toLowerCase()}`)}}>
-                  <Typography >{page}</Typography>
+                <MenuItem key={page.name} onClick={() => navigate(page.path)}>
+                  <Typography>{page.name}</Typography>
                 </MenuItem>
               ))}
-
             </Menu>
           </Box>
           <AdbIcon sx={{ mr: 1 }} />
@@ -62,9 +61,11 @@ const AppBarProps = () => {
           <Box sx={{ display: { md: 'flex' } }}>
             {pages.map((page) => (
               <Button
+                key={page.name}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={() => navigate(page.path)}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>

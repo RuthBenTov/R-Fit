@@ -11,9 +11,7 @@ export async function addEventDb(eventDb: {
   isRecurring: any;
 }) {
   try {
-    console.log(eventDb);
     const { data } = await axios.post("/API/events/addEvent", { eventDb });
-    console.log(data.ok);
     if (data) return data;
     else throw new Error("Could not add event to DB");
   } catch (error) {
@@ -36,7 +34,6 @@ export async function removeEventByID(id: string) {
     const { data } = await axios.delete(`/API/events/removeEventByID/${id}`);
 
     if (data.status) {
-      console.log("its work!");
       return true;
     } else throw new Error("Could not delete event");
   } catch (error) {
@@ -47,8 +44,6 @@ export async function removeEventByID(id: string) {
 export const fetchEvents = createAsyncThunk('events/fetchEvents',async()=>{
   try {
     const {data} = await axios.get("/API/events/getEvents")
-    console.log("data from getEvents:", data);
-
     if(!data) throw new Error("No data found in getEvents")
 
     const formattedEvents:calendarEvent[] = data.events.map((event:any)=>({
