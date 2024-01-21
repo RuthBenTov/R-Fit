@@ -1,0 +1,41 @@
+.popupDiv {
+  width: 50%;
+  height: 80%;
+  position: absolute;
+  z-index: 1;
+  left: 25%;
+  top: 10%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border: 8px solid greenyellow;
+  box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.274);
+    border-radius: 4px;
+  form {
+    font-size: larger;
+    margin: auto;
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 260px;
+      padding: 8px 8px;
+      border: none;
+      background-color: gray;
+    }
+
+    input:focus {
+      background-color: rgb(49, 121, 21);
+      color: rgb(255, 255, 255);
+      border: 1px solid;
+    }
+
+    button {
+      display: block;
+      margin: 30px auto;
+      background-color: rgb(71, 174, 31);
+    }
+  }
+}

@@ -27,8 +27,8 @@ export const getUserFromCookie = async () => {
     if (!data) throw new Error("Couldn't get user");
     return data.user;
   } catch (error) {
-    return null;
     console.error(error);
+    return null;
   }
 };
 
