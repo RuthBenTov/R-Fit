@@ -14,7 +14,7 @@ import { formateEventToCalendar, getThisDate } from "../../assets/functions";
 import "./managerPaseStyle.scss";
 import {
   addEventDb,
-  gatAllEventsDb,
+  getAllEventsDb,
   removeEventByID,
 } from "../../API/eventCtrl";
 import "./managerPaseStyle.scss";
@@ -29,7 +29,7 @@ const ManagerPage = () => {
 
   const getEvents = async () => {
     try {
-      const _events = await gatAllEventsDb();
+      const _events = await getAllEventsDb();
       const formattedEvents = formateEventToCalendar(_events);
 
       setEvents(() => [...formattedEvents]);

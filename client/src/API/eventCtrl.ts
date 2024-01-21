@@ -21,7 +21,7 @@ export async function addEventDb(eventDb: {
   }
 }
 
-export async function gatAllEventsDb() {
+export async function getAllEventsDb() {
   try {
     const { data } = await axios.get("/API/events");
     if (data) return data;

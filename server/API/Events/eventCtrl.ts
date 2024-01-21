@@ -98,7 +98,7 @@ export async function getEvents(req,res){
       if(err) throw err;
       //@ts-ignore
       const arr = results.map((result) => {
-        return {title : `${result.name_trainer}\n${result.training_name}`, start: result.date_time}
+        return {title : `${result.training_name}\n${result.name_trainer}`, start: result.date_time}
       }) 
       res.send({ok:true, events:arr});
     });
