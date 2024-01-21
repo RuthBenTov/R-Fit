@@ -92,12 +92,12 @@ export async function getUserIdFromCookie(req, res) {
     const token = req.cookies.user;
     if (!token) throw new Error("no token provided");
     const cookie = jwt.decode(token, secret);
-    console.log(cookie)
+    console.log(cookie);
     const query = `SELECT * FROM r_fit.users WHERE user_id=${cookie.userID}`;
     connection.query(query, (err, results: User[]) => {
       try {
         if (err) throw err;
-        res.send({ ok: true, user: results[0]});
+        res.send({ ok: true, user: results[0] });
       } catch (error) {
         res.status(500).send({ ok: false, error });
       }
@@ -108,18 +108,48 @@ export async function getUserIdFromCookie(req, res) {
   }
 }
 
-
-export const getUserEvents = async(req,res)=>{
+export const getUserEvents = async (req, res) => {
   try {
     const userId = req.query.userId;
     const query = `SELECT * FROM r_fit.training WHERE user_id = ${userId}`;
 
-    connection.query(query, (err,results)=>{
-      if(err) throw err
-      res.send({ ok:true, events:results })
+    connection.query(query, (err, results) => {
+      if (err) throw err;
+      res.send({ ok: true, events: results });
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ok:false,error});
+    res.status(500).send({ ok: false, error });
+  }
+};
+
+export async function updateUser(req, res) {
+  try {
+    const { id, email, phone, date } = req.body;
+    if (!id || !email || !phone || !date) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const query = `UPDATE \`r_fit\`.\`users\` SET \`date_of_birth\` = '${date}', \`phone_number\` = '${phone}', \`email\` = '${email}' WHERE (\`user_id\` = ${id})`;
+
+    connection.query(query, (err, result) => {
+      try {
+        if (err) {
+          console.error("SQL Query Error:", err);
+          return res.status(500).json({ error: "Internal Server Error" });
+        }
+        //@ts-ignore
+        if (result.affectedRows === 0) {
+          return res.status(404).json({ error: "User not found" });
+        }
+
+        res.status(200).json({ message: "User updated successfully" });
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  } catch (error) {
+    console.error("Server Error:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }

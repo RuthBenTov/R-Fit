@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserEvents, getUserIdFromCookie, loginUser, registerUser } from './usersControl';
+import { getUserEvents, getUserIdFromCookie, loginUser, registerUser, updateUser } from './usersControl';
 
 const router = express.Router()
 
@@ -9,6 +9,7 @@ router
 .post("/login",loginUser)
 .get("/getUserByCookies", getUserIdFromCookie)
 .get("/events", getUserEvents)
+.put("/update",updateUser )
 
 
 export default router
