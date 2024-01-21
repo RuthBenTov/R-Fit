@@ -107,3 +107,19 @@ export async function getUserIdFromCookie(req, res) {
     console.error(error);
   }
 }
+
+
+export const getUserEvents = async(req,res)=>{
+  try {
+    const userId = req.query.userId;
+    const query = `SELECT * FROM r_fit.training WHERE user_id = ${userId}`;
+
+    connection.query(query, (err,results)=>{
+      if(err) throw err
+      res.send({ ok:true, events:results })
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ok:false,error});
+  }
+}

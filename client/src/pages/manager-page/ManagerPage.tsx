@@ -1,55 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack config!
-// import { Calendar } from "@fullcalendar/core";
+import "bootstrap-icons/font/bootstrap-icons.css"; 
 import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import { EventInput } from "@fullcalendar/core";
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
-import { duration } from "@mui/material";
 import { getThisDate } from "../../assets/functions";
 import "./managerPaseStyle.scss";
-import { addEventDb } from "../../API/eventCtrl";
+import { addEventDb, fetchEvents } from "../../API/eventCtrl";
+import { useDispatch } from "react-redux";
 
-interface TrainingTable {
-  training_id: number;
-  traning_name: string;
-  date_time: string;
-  day: string;
-  is_regular: boolean;
-  name_trainer: string;
-  program_training_id: number;
-  duration: number;
-}
 
 const ManagerPage = () => {
+  const dispatch = useDispatch();
   const [isRecurClicked, setIsRecurClicked] = useState(false);
-  const [events, setEvents] = useState<EventInput[]>([
-    {
-      title: "Ruth And Daniel", // a property!
-      start: "2024-01-07T16:00:00", // a property!
-      end: "2024-01-07T17:00:00", // a property! ** see important note below about 'end' **
-      recurring: true,
-    },
-    {
-      title: "Ruth01", // a property!
-      start: "2024-01-07T10:00:00", // a property!
-      end: "2024-01-07T09:00:00", // a property! ** see important note below about 'end' **
-    },
-    {
-      title: "Meeting",
-      start: "2024-01-09T09:00:00", // תאריך ושעת התחלה
-    },
-    {
-      title: "אירוע 45 דקות",
-      start: "2024-01-23T09:00:00",
-      duration: "00:45:00",
-    },
-  ]);
+  const [events, setEvents] = useState<EventInput[]>([]);
 
   function addEvent(event: any) {
     event.preventDefault();
@@ -79,7 +48,14 @@ const ManagerPage = () => {
           recurring: formData.isRecurring,
         };
 
-        addEventDb(formData);
+        addEventDb(formData)
+        .then((data)=>{
+          if(data.ok){
+            dispatch(fetchEvents() as any);
+          }
+        })
+        .catch((error)=> console.error(error));
+      
     setEvents((prev) => [...prev, newEvent]);
   }
   return (
@@ -132,7 +108,7 @@ const ManagerPage = () => {
             right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
           }}
           initialDate={getThisDate()}
-          navLinks={true} // can click day/week names to navigate views
+          navLinks={true} 
           editable={true}
           dayHeaderFormat={{ weekday: "short" }}
           initialView="dayGridWeek"
