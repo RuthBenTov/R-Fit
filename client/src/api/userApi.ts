@@ -23,18 +23,18 @@ export const login = async (userName:string, password: string)=>{
 }
 
 
-export const getUserEventsAPI = createAsyncThunk("events/fetchEvents", async(userId:number)=>{
-    try {
-        const {data} = await axios.get(`/user/events?userId=${userId}`);
-        if(!data) throw new Error("No data in getUserEventsApi");
-        return data.events;
-    } catch (error) {
-        console.error(error);
-        throw error;
-    }
-})
+// export const getUserEventsAPI = createAsyncThunk("events/fetchEvents", async(userId:number)=>{
+//     try {
+//         const {data} = await axios.get(`/user/events?userId=${userId}`);
+//         if(!data) throw new Error("No data in getUserEventsApi");
+//         return data.events;
+//     } catch (error) {
+//         console.error(error);
+//         throw error;
+//     }
+// })
 
 
-export const fetchUserId = createAsyncThunk("user/fetchUserId", async(_, {dispatch})=>{
+// export const fetchUserId = createAsyncThunk("user/fetchUserId", async(_, {dispatch})=>{
     
-})
+// })

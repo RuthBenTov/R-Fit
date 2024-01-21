@@ -1,18 +1,15 @@
 import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-icons/font/bootstrap-icons.css"; // needs additional webpack config!
-// import { Calendar } from "@fullcalendar/core";
+import "bootstrap-icons/font/bootstrap-icons.css"; 
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import { useEffect } from 'react'
 import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { actionSelector } from "../../features/actions/eventSlice";
-import { getUserEventsAPI } from "../../API/userApi";
+import dayGridPlugin from '@fullcalendar/daygrid' 
+import { CalendarEvent, actionSelector } from "../../features/actions/eventSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { fetchEvents } from "../../API/eventCtrl";
 
 
 
@@ -21,7 +18,7 @@ const Schedule = () => {
  const events = useAppSelector(actionSelector);
 
  useEffect(()=>{
-  dispatch(getUserEventsAPI(userId));
+  dispatch(fetchEvents());
  },[dispatch]);
 
 
@@ -47,7 +44,7 @@ const Schedule = () => {
         editable={true}
         dayHeaderFormat={{ weekday: "short" }}
         initialView="timeGridWeek"
-        events={events}
+        events={events as CalendarEvent[]}
         allDaySlot={false}
         slotMinTime= "06:00:00"
         slotMaxTime="21:00:00"
