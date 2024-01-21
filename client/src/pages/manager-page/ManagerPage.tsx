@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
@@ -8,12 +8,16 @@ import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import { EventInput } from "@fullcalendar/core";
+import { EventClickArg, EventInput } from "@fullcalendar/core";
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import { duration } from "@mui/material";
-import { getThisDate } from "../../assets/functions";
+import { formateEventToCalendar, getThisDate } from "../../assets/functions";
 import "./managerPaseStyle.scss";
-import { addEventDb } from "../../API/eventCtrl";
+import {
+  addEventDb,
+  gatAllEventsDb,
+  removeEventByID,
+} from "../../API/eventCtrl";
 
 interface TrainingTable {
   training_id: number;
@@ -29,27 +33,43 @@ interface TrainingTable {
 const ManagerPage = () => {
   const [isRecurClicked, setIsRecurClicked] = useState(false);
   const [events, setEvents] = useState<EventInput[]>([
-    {
-      title: "Ruth And Daniel", // a property!
-      start: "2024-01-07T16:00:00", // a property!
-      end: "2024-01-07T17:00:00", // a property! ** see important note below about 'end' **
-      recurring: true,
-    },
-    {
-      title: "Ruth01", // a property!
-      start: "2024-01-07T10:00:00", // a property!
-      end: "2024-01-07T09:00:00", // a property! ** see important note below about 'end' **
-    },
-    {
-      title: "Meeting",
-      start: "2024-01-09T09:00:00", // תאריך ושעת התחלה
-    },
+    // {
+    //   id: "1234556",
+    //   title: "Ruth And Daniel", // a property!
+    //   start: "2024-01-20T16:00:00", // a property!
+    //   end: "2024-01-20T17:00:00", // a property! ** see important note below about 'end' **
+    //   recurring: true,
+    // },
+    // {
+    //   title: "Ruth01", // a property!
+    //   start: "2024-01-07T10:00:00", // a property!
+    //   end: "2024-01-07T09:00:00", // a property! ** see important note below about 'end' **
+    // },
+    // {
+    //   title: "Meeting",
+    //   start: "2024-01-09T09:00:00", // תאריך ושעת התחלה
+    // },
     {
       title: "אירוע 45 דקות",
       start: "2024-01-23T09:00:00",
       duration: "00:45:00",
     },
   ]);
+
+  const getEvents = async () => {
+    try {
+      const _events = await gatAllEventsDb();
+      const formattedEvents = formateEventToCalendar(_events);
+
+      setEvents((prevEvents) => [...formattedEvents]);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
+
+  useEffect(() => {
+    getEvents();
+  }, []);
 
   function addEvent(event: any) {
     event.preventDefault();
@@ -62,30 +82,37 @@ const ManagerPage = () => {
       isRecurring: event.target.isRecurring.checked,
     };
 
-    const newEvent: EventInput = !isRecurClicked
-      ? {
-          title: `${formData.trainingName}`,
-          start: `${formData.date}T${formData.timeStart}:00`,
-          duration: { minutes: formData.duration },
-        }
-      : {
-          title: `${formData.trainingName}`,
-          start: `${formData.date}T${formData.timeStart}:00`,
-          startTime: `${formData.timeStart}:00`,
-          endTime: `${formData.timeStart}:00`,
-          duration: { minutes: formData.duration },
-          allDay: false,
-          daysOfWeek: [new Date(formData.date).getDay()],
-          recurring: formData.isRecurring,
-        };
+    // const newEvent: EventInput = !isRecurClicked
+    //   ? {
+    //       title: `${formData.trainingName}`,
+    //       start: `${formData.date}T${formData.timeStart}:00`,
+    //       duration: { minutes: formData.duration },
+    //     }
+    //   : {
+    //       title: `${formData.trainingName}`,
+    //       start: `${formData.date}T${formData.timeStart}:00`,
+    //       startTime: `${formData.timeStart}:00`,
+    //       endTime: `${formData.timeStart}:00`,
+    //       duration: { minutes: formData.duration },
+    //       allDay: false,
+    //       daysOfWeek: [new Date(formData.date).getDay()],
+    //       recurring: formData.isRecurring,
+    //     };
 
-        addEventDb(formData);
-    setEvents((prev) => [...prev, newEvent]);
+    addEventDb(formData);
+    getEvents();
   }
+  const removeEvent = (info: EventClickArg) => {
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      const eventId = info.event.id;
+      removeEventByID(eventId);
+      getEvents()
+    }
+  };
   return (
     <div className="ManagerPageDiv">
       <form className="addEventForm box" onSubmit={(ev) => addEvent(ev)}>
-      <h2>Manager Page</h2>
+        <h2>Manager Page</h2>
         <input
           type="text"
           name="trainingName"
@@ -139,6 +166,7 @@ const ManagerPage = () => {
           height="400px"
           aspectRatio={2}
           events={events}
+          eventClick={(info) => removeEvent(info)}
         />
       </div>
     </div>

@@ -6,23 +6,25 @@ import "./profilePage.scss";
 import { getUserFromCookie } from "../../assets/functions";
 
 const ProfilePage = () => {
-  const [user, setUser] = useState<{name:string, email:string, phone_number:string, date_of_birth:string  }  | null>(null);
-  // const [lastEvent, setLastEvent] = useState()
-  // const [nextEvent, setNextEvent] = useState()
-  
-  
+  const [user, setUser] = useState<{
+    name: string;
+    email: string;
+    phone_number: string;
+    date_of_birth: string;
+  } | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userFromCookie = await getUserFromCookie();
         setUser(userFromCookie);
       } catch (error) {
-        console.error('Error fetching user from cookie:', error);
+        console.error("Error fetching user from cookie:", error);
       }
     };
 
     fetchData();
-  }, []); // Passing an empty dependency array means this effect will run once when the component mounts
+  }, []);
 
   return (
     <div className="profilePageDiv">

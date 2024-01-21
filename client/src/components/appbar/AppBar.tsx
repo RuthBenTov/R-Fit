@@ -40,10 +40,11 @@ const AppBarProps = () => {
               open={Boolean(anchorElNav)}
             >
               {pages.map((page) => (
-                <MenuItem key={page} >
+                <MenuItem key={page} onClick={() => {navigate(`/${page.toLowerCase()}`)}}>
                   <Typography >{page}</Typography>
                 </MenuItem>
               ))}
+
             </Menu>
           </Box>
           <AdbIcon sx={{ mr: 1 }} />

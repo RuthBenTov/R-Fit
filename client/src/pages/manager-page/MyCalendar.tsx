@@ -14,6 +14,20 @@ const MyCalendar: React.FC = () => {
     allDay: true,
   });
 
+  const handleEventDrop = (info: any) => {
+    // 'info' contains information about the dropped event
+    const { event, start, end, allDay } = info;
+    console.log(info)
+    // Handle the event change as needed
+ 
+    console.log('Event dropped:', event.title, event.start, event.end, event.id ,allDay);
+    
+    // You can make an API call or update your state here
+    // For example, if you have an array of events in your component state, you can update it like this:
+    // const updatedEvents = yourEvents.map((item) => (item.id === event.id ? { ...item, start, end, allDay } : item));
+    // setYourEvents(updatedEvents);
+  };
+
   const handleDateSelect = (selectInfo: DateSelectArg) => {
     setEvent({
       title: '',
@@ -63,10 +77,12 @@ const MyCalendar: React.FC = () => {
         editable={true}
         selectable={true}
         select={handleDateSelect}
+        eventDrop={handleEventDrop}
         eventClick={(info) => {
           if (
             window.confirm('Are you sure you want to delete this event?')
           ) {
+            console.log(info)
             info.event.remove();
           }
         }}

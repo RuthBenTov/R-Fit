@@ -1,7 +1,6 @@
 import connection from "../../DB/database";
 import { Event } from "./eventModel";
 
-
 export async function addEvent(req, res) {
   try {
     const { eventDb } = req.body;
@@ -21,9 +20,9 @@ export async function addEvent(req, res) {
         console.log(result.changedRows);
         //@ts-ignore
         if (result.changedRows) {
-        res.send({ ok: true, result });
+          res.send({ ok: true, result });
         } else {
-        res.send({ ok: false, result: "no changes found" });
+          res.send({ ok: false, result: "no changes found" });
         }
       } catch (error) {
         console.error(error);
@@ -35,12 +34,59 @@ export async function addEvent(req, res) {
     res.status(500).send({ ok: false, error });
   }
 }
+export async function getAllEvents(req, res) {
+  try {
+    const query = "SELECT * FROM r_fit.training";
 
-// eventDb: {
-//   trainingName: "ruth the qween",
-//   trainer: "ruths training",
-//   date: "2024-01-11",
-//   timeStart: "00:21",
-//   duration: 8,
-//   isRecurring: true
-// }
+    connection.query(query, (err, result) => {
+      try {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ error: "Internal Server Error" });
+          return;
+        }
+        if (!result) {
+          console.error("No events found");
+          res.status(404).json({ error: "No events found" });
+          return;
+        }
+        res.status(200).json(result);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+export const removeEventByID = async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const query = `DELETE FROM r_fit.training WHERE training_id = ${eventId}`;
+    connection.query(query, (err, result) => {
+      try {
+        if (err) {  
+          console.error(err);
+          res.status(500).json({ error: "Internal Server Error" });
+          return;
+        }
+        //@ts-ignore
+        if (!result.affectedRows) {
+          console.error("No events found");
+          res.status(404).json({ error: "No events found" });
+          return;
+        }
+        res.status(200).json({ status: true });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
