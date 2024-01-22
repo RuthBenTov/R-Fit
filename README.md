@@ -30,8 +30,8 @@ Clicking on an event prompts a message confirming the deletion of the event (tra
 
 
 SCHEDULE
-This page is visible to users and displays the monthly/weekly training diary based on the customer's choice.
-Events are directly fetched from the database and applied to the calendar.
+This page is visible to users and displays the monthly/weekly training diary based on the manager's choice.
+Events are directly fetched from the database saved on redux (on mount) and applied to the calendar.
 At the top of the page is a button that navigates to the profile page.
 
 
