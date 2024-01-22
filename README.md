@@ -33,6 +33,8 @@ SCHEDULE
 This page is visible to users and displays the monthly/weekly training diary based on the manager's choice.
 Events are directly fetched from the database saved on redux (on mount) and applied to the calendar.
 At the top of the page is a button that navigates to the profile page.
+At the left end of the page there is a button that appears only for the admin -
+and leads him to the management page
 
 
 
