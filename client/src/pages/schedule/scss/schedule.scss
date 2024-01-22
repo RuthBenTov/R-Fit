@@ -1,0 +1,62 @@
+.schedule-container{
+    background: url("https://rare-gallery.com/uploads/posts/866507-Fitness-Bokeh-Brown-haired-Barbell-Muscle-Belly.jpg");
+    background-size:cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+.fc-view-harness, .fc-view-harness-passive{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+ .fc-event ,  .fc-event-past{
+    background-color:transparent;
+    border: 0;
+}
+
+.fc-timegrid-event{
+    font-size:var(--fc-large-font-size);
+}
+
+.trainingName{
+    font-weight: 900;
+    font-size: 17px;
+}
+
+.coachName{
+    font-size: 10px;
+}
+
+#root h2{
+    color: white;
+}
+
+
+.profileIcon{
+    font-size: 40px;
+    color: rgb(149, 149, 149);
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    left: 10px;
+
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+.managerCalendarIcon{
+    font-size: 50px;
+    color: rgb(149, 149, 149);
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    padding: 10px;
+    top: 20px;
+    right: 10px;
+
+    &:hover{
+        cursor: pointer;
+    }
+}

@@ -1,52 +1,105 @@
-import axios from "axios";
-import React, { useState } from "react";
+import { Box, Button, Container, TextField } from "@mui/material";
+import { useState } from "react";
+import './signIn.scss';
+import { InputPassword } from "../../components/passwordInput/Password";
+import { useNavigate } from "react-router-dom";
+import AppBarProps from "../../components/appbar/AppBar";
+import { login } from "../../API/userApi";
+
 
 const SignIn = () => {
-  const [textUserName, setUserName] = useState("");
-  const [textPassword, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
-    async function handleSignIn (userName:string, password:string){
-      try {
-        const {data} = await axios.post("http://localhost:3000/API/users/login" , {userName, password})
-        if(data === "OK")
-        console.log(userName +  password +"-------success")
-      
-        
-      } catch (error) {
-        console.error(error)
+  async function handleSignIn() {
+    try {
+      const response = await login(userName, password)
+
+      if (response?.data.ok) {
+        console.log('Login successful');
+        navigate("/schedule")
+      } else {
+        console.error('Login failed:', response?.data.error)
       }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   }
 
   return (
-    <div>
-      <form
-        onSubmit={(ev) => {
-          ev.preventDefault();
-          handleSignIn(textUserName, textPassword);
+    <div className="signIn">
+      <AppBarProps />
+      <Container
+        sx={{
+          padding: "0px 4px 35px 3px",
+          border: "1px solid gray",
+          borderRadius: "12px",
+          marginTop:"70px",
+          backgroundColor: "rgba(255, 255, 255, 0.4)",
+          textAlign: "center"
         }}
       >
-        <input
-          name="userName"
-          className="userNameInput"
-          onChange={(ev) => {
-            setUserName(ev.target.value);
-          }}
-          type="text"
-          placeholder="User name"
-        />
-        <input
-          name="password"
-          className="passwordInput"
-          onChange={(ev) => {
-            setPassword(ev.target.value);
-          }}
-          type="text"
-          placeholder="Password"
-        />
-        <button type="submit">Sign in</button>
-      </form>
+        <h2
+          style={{ color: "#54a23c", marginBottom: "35px", fontSize: "45px",fontWeight:"bolder",
+          letterSpacing: ".15em",
+          textShadow: "-3px 6px 1px black"}}
+        >
+          Sign in
+        </h2>
+        <Box sx={{ width: "100%" }}>
+          <TextField
+            variant="outlined"
+            className="textField userNameInput"
+            fullWidth
+            type="text"
+            size="small"
+            value={userName}
+            placeholder="User name"
+            onChange={(ev) => {
+              setUserName(ev.target.value);
+            }}
+          />
+          <InputPassword
+            onInput={(ev) => {
+              setPassword(ev.target.value);
+            }}
+          />
+          <Button
+            onClick={() => {
+              handleSignIn();
+            }}
+            size="small"
+            variant="contained"
+            type="submit"
+            sx={{ backgroundColor: "#54a23c", color: "black", padding: "10px" }}
+          >
+            Login
+          </Button>
+          <p
+            style={{
+              paddingBottom: "150px",
+              textAlign: "center",
+            
+            }}
+          >
+            Forget your password?
+          </p>
+          <Button
+            onClick={() => {
+              navigate("/sign-up");
+            }}
+            size="small"
+            sx={{ backgroundColor: "#54a23c",color:"black" }}
+            variant="contained"
+          >
+            Sign Up
+          </Button>
+        </Box>
+      </Container>
     </div>
   );
 };
 
 export default SignIn;
+
