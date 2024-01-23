@@ -1,5 +1,6 @@
 import { Box, Button, Container, TextField } from "@mui/material";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import './signIn.scss';
 import { InputPassword } from "../../components/passwordInput/Password";
 import { useNavigate } from "react-router-dom";
@@ -14,13 +15,19 @@ const SignIn = () => {
 
   async function handleSignIn() {
     try {
+      if (!userName || !password) {
+        toast.info("Please fill all fileds");
+        return;
+      }
       const response = await login(userName, password)
 
       if (response?.data.ok) {
         console.log('Login successful');
+        toast.success("Login successful");
         navigate("/schedule")
       } else {
-        console.error('Login failed:', response?.data.error)
+        console.error('Login failed:', response?.data.error);
+        toast.error("Password or username are incorrect.");
       }
     } catch (error) {
       console.error('Error during login:', error);

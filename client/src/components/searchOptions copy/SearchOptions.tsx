@@ -4,8 +4,8 @@ const SearchOptions = () => {
   const [trainingName, setTrainingName] = useState('');
   const [trainer, setTrainer] = useState('');
 
-  const trainingNameOptions = ['Lila', 'Ruth', 'Daniel', 'Lola'];
-  const trainerOptions = ['Yoga', 'Pilates', 'Wod', 'Boxing'];
+  const trainerOptions = ['Lila', 'Ruth', 'Daniel', 'Lola'];
+  const trainingNameOptions = ['Yoga', 'Pilates', 'Wod', 'Boxing'];
 
   const filteredTrainingNameOptions = trainingNameOptions.filter((option) =>
     option.toLowerCase().includes(trainingName.toLowerCase())
