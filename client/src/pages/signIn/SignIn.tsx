@@ -67,7 +67,7 @@ const SignIn = () => {
               setUserName(ev.target.value);
             }}
           />
-          <InputPassword
+          <InputPassword showError={false}
             onInput={(ev) => {
               setPassword(ev.target.value);
             }}

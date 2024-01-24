@@ -126,6 +126,7 @@ export const getUserEvents = async (req, res) => {
 export async function updateUser(req, res) {
   try {
     const { id, email, phone, date } = req.body;
+    
     if (!id || !email || !phone || !date) {
       return res.status(400).json({ error: "Missing required fields" });
     }
@@ -177,8 +178,7 @@ export async function isAdmin(req, res, next) {
         }
 
         if (user.role === "admin") {
-          // המשתמש הוא אדמין
-          return next(); // המשך לתהליך הבא
+          return next(); 
         } else {
           console.error("User is not an admin");
           return res.status(403).send({ ok: false, error: "Forbidden" });

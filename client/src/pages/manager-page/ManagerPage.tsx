@@ -57,10 +57,10 @@ const ManagerPage = () => {
         .then((data)=>{
           if(data.ok){
             dispatch(fetchEvents() as any);
+            getEvents()
           }
         })
         .catch((error)=> console.error(error));
-        getEvents()
   }
   
   const removeEvent = (info: EventClickArg) => {
