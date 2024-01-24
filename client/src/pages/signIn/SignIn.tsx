@@ -1,7 +1,7 @@
 import { Box, Button, Container, TextField } from "@mui/material";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import './signIn.scss';
+import "./scss/signIn.scss";
 import { InputPassword } from "../../components/passwordInput/Password";
 import { useNavigate } from "react-router-dom";
 import AppBarProps from "../../components/appbar/AppBar";
@@ -85,12 +85,13 @@ const SignIn = () => {
           </Button>
           <p
             style={{
-              paddingBottom: "150px",
+              paddingTop: "120px",
+              paddingBottom: "10px",
               textAlign: "center",
             
             }}
           >
-            Forget your password?
+            Don't have an account?
           </p>
           <Button
             onClick={() => {

@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import { InputPassword } from "../../components/passwordInput/Password";
 import { toast } from "react-toastify";
 import { register } from "../../API/userApi";
-import "./signUp.scss";
+import "./scss/signUp.scss";
 import AppBarProps from "../../components/appbar/AppBar";
 
 const SignUp = () => {
@@ -135,7 +135,7 @@ const SignUp = () => {
             inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           />
           <InputPassword onInput={(ev) => setPassword(ev.target.value)} />
-          <InputPassword onInput={(ev) => setMatchPassword(ev.target.value)} />
+          <InputPassword  children="Confirm password" onInput={(ev) => setMatchPassword(ev.target.value)} />
           <Button
             onClick={handleSignUp}
             size="small"
@@ -148,9 +148,10 @@ const SignUp = () => {
           >
             Signup
           </Button>
+          <div style={{marginBottom:'19px',marginTop:'19px'}}>
           <div
             style={{
-              padding: "3px 2px",
+              padding: "3px 3px",
               border: "1px solid gray",
               margin: "auto",
               width: "1px",
@@ -158,7 +159,7 @@ const SignUp = () => {
               textAlign: "center",
             }}
           ></div>
-          <br />
+          </div>
           <Button
             size="small"
             sx={{ backgroundColor: "#413b2b" }}

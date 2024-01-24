@@ -6,6 +6,7 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid' 
 import { FullcalendarProps, getBackgroundColor } from "../../pages/schedule/util/modelsUtil";
 import PersonIcon from '@mui/icons-material/Person';
+import './scss/fullcalendar.scss'
 
 const Fullcalendar = ({calendarEvents}:FullcalendarProps) => {
   
