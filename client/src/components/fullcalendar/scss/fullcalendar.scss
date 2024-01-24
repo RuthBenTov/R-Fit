@@ -1,0 +1,10 @@
+.fc-next-button.btn.btn-primary, .fc-prev-button.btn.btn-primary,.fc--button.btn.btn-primary, .fc-timeGridDay-button.btn.btn-primary, .btn-primary.active, .btn-group,.fc-today-button.btn.btn-primary {
+    background-color: #8b8181;
+    border: transparent
+}
+.fc-timeGridWeek-button.btn.btn-primary,.fc--button.btn.btn-primary, .fc-timeGridDay-button.btn.btn-primary,.fc-next-button.btn.btn-primary,.fc-prev-button.btn.btn-primary {
+    &:hover{
+        background-color: #474444;
+    }
+}
+

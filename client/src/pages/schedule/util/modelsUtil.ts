@@ -10,8 +10,8 @@ export interface FullcalendarProps {
   }
 
   const trainingNameColors:TrainingNameColors = {
-    'daniel': 'lightblue',
-    'neta': 'lightgreen',
+    'Daniel': 'lightblue',
+    'Neta': 'lightgreen',
     'Lila': 'lightcoral',
     'Ruth': 'lightcoral',
   };

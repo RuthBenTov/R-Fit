@@ -1,5 +1,5 @@
 import AppBarProps from '../../components/appbar/AppBar'
-import './main.scss'
+import "./scss/main.scss";
 import { useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -32,7 +32,7 @@ const Main = () => {
         <h1><span>WORKOUT</span> WITH ME</h1>
         <p>Exercises that will help your road to healthy living, weight loss and stress relief.</p>
         </div>
-        <div className='button-content'>
+        <div className={`button-content ${isVisible ? 'visible': 'hidden'}`}>
         <Stack direction="row">
       <Button onClick={() => setIsVisible(false)} sx={{backgroundColor:'#54a23c',color:'white', marginLeft: '50px'}} variant="contained">Get started</Button>
     </Stack>

@@ -1,6 +1,7 @@
 import { Box, Button, Container, TextField } from "@mui/material";
 import { useState } from "react";
-import './signIn.scss';
+import { toast } from "react-toastify";
+import "./scss/signIn.scss";
 import { InputPassword } from "../../components/passwordInput/Password";
 import { useNavigate } from "react-router-dom";
 import AppBarProps from "../../components/appbar/AppBar";
@@ -14,13 +15,19 @@ const SignIn = () => {
 
   async function handleSignIn() {
     try {
+      if (!userName || !password) {
+        toast.info("Please fill all fileds");
+        return;
+      }
       const response = await login(userName, password)
 
       if (response?.data.ok) {
         console.log('Login successful');
+        toast.success("Login successful");
         navigate("/schedule")
       } else {
-        console.error('Login failed:', response?.data.error)
+        console.error('Login failed:', response?.data.error);
+        toast.error("Password or username are incorrect.");
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -60,7 +67,7 @@ const SignIn = () => {
               setUserName(ev.target.value);
             }}
           />
-          <InputPassword
+          <InputPassword showError={false}
             onInput={(ev) => {
               setPassword(ev.target.value);
             }}
@@ -78,12 +85,13 @@ const SignIn = () => {
           </Button>
           <p
             style={{
-              paddingBottom: "150px",
+              paddingTop: "120px",
+              paddingBottom: "10px",
               textAlign: "center",
             
             }}
           >
-            Forget your password?
+            Don't have an account?
           </p>
           <Button
             onClick={() => {

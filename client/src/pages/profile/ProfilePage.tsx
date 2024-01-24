@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa6";
 import { IoMdCloseCircle } from "react-icons/io";
-
-import { FaFlagCheckered } from "react-icons/fa";
-import { FaClock } from "react-icons/fa";
-import "./profilePage.scss";
 import { getUserFromCookie } from "../../assets/functions";
 import Popup from "./Popup";
+import "./scss/profilePage.scss";
 
 const ProfilePage = () => {
   const [user, setUser] = useState<{
@@ -40,7 +37,7 @@ const ProfilePage = () => {
       <div className="userInfoDiv">
         <div className="userImg">
           <img
-            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D"
+            src="https://images.pexels.com/photos/5128256/pexels-photo-5128256.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt=""
           />
           {editor ? (
@@ -59,7 +56,7 @@ const ProfilePage = () => {
               />
             </div>
             <div className="userBirthDay userInfoItem">
-              <p>Birthday: {user?.date_of_birth.substring(0, 10)}</p>
+              <p>Birthday: {user && user.date_of_birth ? user.date_of_birth.substring(0, 10) : ''}</p>
               <FaPen
                 className="penIcon"
                 onClick={() => {

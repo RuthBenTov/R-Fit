@@ -3,15 +3,16 @@
 }
 
 .profilePageDiv {
+  background: url("https://media.istockphoto.com/id/1177437552/photo/black-color-felt-letter-board-with-white-alphabet-in-word-profile-background.jpg?s=2048x2048&w=is&k=20&c=yNkT1XF6JGqKXNxfbka5My6EKq8p-rdsbTkY_C6wy2w=");
+  background-size: cover;
   width: 100vw;
   height: 100vh;
   padding: 6rem;
-  background-color: rgb(24, 43, 18);
   display: flex;
   justify-content: space-around;
   
   .userInfoDiv {
-    background-color: antiquewhite;
+    background-color: rgba(255, 255, 255, 0.4);
     border: 1px solid gray;
     border-radius: 10px;
     box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.141);
@@ -41,35 +42,29 @@
     padding: 1rem;
     text-align: left;
     display: flex;
-    /* סקרול בר עיצוב יפה וקלאסי */
 
-/* עיצוב כללי */
 ::-webkit-scrollbar {
-  width: 12px; /* רוחב סרוק בר */
+  width: 12px; 
   border-radius: 20px;
 }
 
-/* Track (רקע הסרול בר) */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* רקע סרוק בר */
+  background: #f1f1f1; 
   border-radius: 20px;
 }
 
-/* Handle (החלק המתפרצת בסרול בר) */
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
-  background: #585858; /* צבע הסרול בר עצמו */
+  background: #585858; 
 }
 
-/* פינות עגולות בחלק העליון של הסרול בר */
 ::-webkit-scrollbar-thumb:hover {
   border-radius: 20px;
-  background: #555; /* צבע הסרול בר עצמו בעת הרחקת עכבר מעליו */
+  background: #555; 
 }
 
-/* צבע הסרול בר כאשר הקלט מתבצע */
 ::-webkit-scrollbar-thumb:active {
-  background: #555; /* צבע הסרול בר עצמו כאשר נלחץ עליו */
+  background: #555; 
 }
     .lastTrainings,
     .nextTrainings {
@@ -107,7 +102,7 @@
 
 .closeBtn {
   position: absolute;
-  // width: 40px;
+  width: 40px;
   font-size: xx-large;
 
   top: 9%;
