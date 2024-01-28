@@ -4,7 +4,7 @@ const SearchOptions = () => {
   const [trainingName, setTrainingName] = useState('');
   const [trainer, setTrainer] = useState('');
 
-  const trainerOptions = ['Lila', 'Ruth', 'Daniel', 'Lola'];
+  const trainerOptions = ['Neta', 'Ruth', 'Daniel', 'Lola'];
   const trainingNameOptions = ['Yoga', 'Pilates', 'Wod', 'Boxing'];
 
   const filteredTrainingNameOptions = trainingNameOptions.filter((option) =>
