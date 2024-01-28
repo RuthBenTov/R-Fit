@@ -69,10 +69,10 @@ const SignUp = () => {
             onChange={(ev) => setName(ev.target.value)}
           />
           <TextField variant="outlined" className="textField" fullWidth type="date" size="small" label="Date of birth" value={birthday}
-            onChange={(ev) => setBirthday(ev.target.value)}
+            onChange={(ev) => setBirthday(ev.target.value)} InputLabelProps={{ shrink: true }}
           />
           <TextField variant="outlined" className="textField" fullWidth type="email" size="small" label="Email Address" value={email} placeholder="Email Address"
-            onChange={(ev) => setEmail(ev.target.value)}
+            onChange={(ev) => setEmail(ev.target.value)} 
           />
           <TextField variant="outlined" fullWidth size="small" label="Phone Number" placeholder="Phone Number" value={phone}
             onChange={handleInputChange} inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}

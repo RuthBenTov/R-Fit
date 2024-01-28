@@ -12,7 +12,7 @@ export interface FullcalendarProps {
   const trainingNameColors:TrainingNameColors = {
     'Daniel': 'lightblue',
     'Neta': 'lightgreen',
-    'Lila': 'lightcoral',
+    'Lola': 'lightyellow',
     'Ruth': 'lightcoral',
   };
   
