@@ -1,4 +1,5 @@
 import axios from "axios";
+const server = "http://localhost:3000" 
 
 export const register = async (user: {
   userName: string;
@@ -10,7 +11,7 @@ export const register = async (user: {
 }) => {
   try {
     if (!user) throw new Error("no data from register in client");
-    const response = await axios.post("/API/users/register", { user });
+    const response = await axios.post(`${server}/API/users/register`, { user });
     if (response) return response;
     else return undefined;
   } catch (error) {
