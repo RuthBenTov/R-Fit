@@ -1,10 +1,10 @@
-import mySql from "mySql2";
+import mysql from "mysql2";
 import dotenv from "dotenv"
 
 dotenv.config()
 const {mySqlPassword} = process.env;
 
-const connection = mySql.createConnection({
+const connection = mysql.createConnection({
     host: "sql11.freemysqlhosting.net",
     port: 3306,
     user: "sql11680287",
