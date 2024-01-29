@@ -1,4 +1,4 @@
-import mySql from "mySql2";
+// import mySql from "mysql2";
 import connection from "../../DB/database";
 
 export const createDB = async (req, res) => {
