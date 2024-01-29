@@ -19,7 +19,7 @@ import {
 import "./managerPaseStyle.scss";
 import {  fetchEvents } from "../../API/eventCtrl";
 import { useDispatch } from "react-redux";
-import SearchOptions from "../../components/searchOptions copy/SearchOptions";
+import SearchOptions from "../../components/searchOptions/SearchOptions";
 
 
 const ManagerPage = () => {

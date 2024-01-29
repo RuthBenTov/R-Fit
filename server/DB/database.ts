@@ -5,14 +5,19 @@ dotenv.config()
 const {mySqlPassword} = process.env;
 
 const connection = mySql.createConnection({
-    host: "localhost",
+    host: "sql11.freemysqlhosting.net",
     port: 3306,
-    user: "root",
+    user: "sql11680287",
     password: mySqlPassword,
-    database: "r_fit"
+    database: "sql11680287"
   });
-  
-
+// var del = connection._protocol.delegateError;
+// connection._protocol._delegateError = function(err, sequence){
+//     if(err.fatal){
+//         console.trace('fatal error ' + err.message);
+//     }
+//     return del.call(this, err, sequence);
+// }
 
 connection.connect((err)=>{
     try {

@@ -6,6 +6,7 @@ import mySqlRouter from "./API/DatabaseCreation/mySqlRouters"
 import cookieParser from 'cookie-parser'
 import eventRouts from "./API/Events/eventRouts";
 import userRoutes from "./API/usersAPI/usersRoutes"
+import { corsOptions } from "./config/corsOptions";
 
 
 dotenv.config()
@@ -13,7 +14,26 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors(corsOptions));
+
+// app.get("/api/check/sql", async (req,res)=>{
+//   try {
+//     console.log("check");
+//     const query = "SELECT * FROM `check`"
+
+//     connection.query(query,(error,results)=>{
+//       try {
+//         if (error) throw error;
+//         res.send({ok: true, check: "checked", sqlResults:results});
+//       } catch (error) {
+//         res.status(500).send({ok: false, error:error});
+//       }
+//     })
+    
+//   } catch (error) {
+//     res.status(500).send({error:error});
+//   }
+// })
 
 app.use(express.json());
 app.use(cookieParser())
