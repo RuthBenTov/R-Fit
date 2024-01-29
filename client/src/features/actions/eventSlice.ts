@@ -11,10 +11,12 @@ import { fetchEvents } from "../../API/eventCtrl";
 
 interface addEventAction {
     userEvents: CalendarEvent[] | null;
+    status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState:addEventAction = {
     userEvents: null,
+    status: 'idle'
 };
 
 export const actionSlice = createSlice({
@@ -30,8 +32,9 @@ export const actionSlice = createSlice({
         .addCase(fetchEvents.fulfilled,(state,action)=>{
             state.userEvents = action.payload;
         })
-        .addCase(fetchEvents.rejected, (state, action)=>{
-            console.error('Error fetching events:', action.error.message);
+        .addCase(fetchEvents.rejected, (state)=>{
+            // console.error('Error fetching events:', action.error.message);
+            state.status = "failed"
         });
     },
 });
