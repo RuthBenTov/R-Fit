@@ -5,9 +5,10 @@ import { Box, Container } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { InputPassword } from "../../components/passwordInput/Password";
 import { toast } from "react-toastify";
-import { register } from "../../API/userApi";
+
 import "./scss/signUp.scss";
 import AppBarProps from "../../components/appbar/AppBar";
+import { register } from "../../API/userApi";
 
 const SignUp = () => {
   const [userName, setUserName] = useState<string>("");
@@ -56,7 +57,7 @@ const SignUp = () => {
     <div className="signUp">
       <AppBarProps />
       <Container sx={{width: "30%", padding: "0px 4px 35px 3px", border: "1px solid gray", marginRight: "170px", borderRadius: "12px", textAlign: "center",
-          marginTop: "70px", backgroundColor: "rgba(255, 255, 255, 0.4)",}}
+          marginTop: "70px", backgroundColor: "#b3b3b3",}}
       >
         <h2 style={{color: "#413b2b", marginBottom: "35px", fontSize: "45px", fontWeight: "bolder", letterSpacing: ".15em", textShadow: "-3px 2px 1px #ffff",}}>
           Sign Up

@@ -8,6 +8,7 @@ import AppBarProps from "../../components/appbar/AppBar";
 import { login } from "../../API/userApi";
 
 
+
 const SignIn = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
@@ -43,7 +44,7 @@ const SignIn = () => {
           border: "1px solid gray",
           borderRadius: "12px",
           marginTop:"70px",
-          backgroundColor: "rgba(255, 255, 255, 0.4)",
+          backgroundColor: "#b3b3b3",
           textAlign: "center"
         }}
       >

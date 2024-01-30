@@ -1,6 +1,7 @@
 import { FC } from "react";
-import { updateUser } from "../../API/userApi";
+
 import "./scss/popup.scss";
+import { updateUser } from "../../API/userApi";
 interface PopupProps {
   user: {
     user_id: number;
