@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(cookieParser())
 
 app.use("/API/MySql", mySqlRouter )
-app.use("/API/users", userRoutes)
+app.use("/API/APIusers", userRoutes)
 app.use("/API/events", eventRouts);
 
 
