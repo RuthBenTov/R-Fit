@@ -14,7 +14,25 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+
+
+app.use(express.json());
 app.use(cors(corsOptions));
+// app.use(cors({
+//   credentials:true,
+//   origin: process.env.NODE_ENV === 'production' ? process.env.CLIENT_PROD_URL : process.env.CLIENT_DEV_URL,
+// }));
+app.use(cookieParser())
+
+app.use("/API/MySql", mySqlRouter )
+app.use("/API/users", userRoutes)
+app.use("/API/events", eventRouts);
+
+
+app.listen(PORT, () => {
+  console.log(`app listening on PORT : ${PORT}❤️`);
+  
+});
 
 // app.get("/api/check/sql", async (req,res)=>{
 //   try {
@@ -34,16 +52,3 @@ app.use(cors(corsOptions));
 //     res.status(500).send({error:error});
 //   }
 // })
-
-app.use(express.json());
-app.use(cookieParser())
-
-app.use("/API/MySql", mySqlRouter )
-app.use("/API/APIusers", userRoutes)
-app.use("/API/events", eventRouts);
-
-
-app.listen(PORT, () => {
-  console.log(`app listening on PORT : ${PORT}❤️`);
-
-});

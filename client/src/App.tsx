@@ -3,15 +3,13 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/routes";
 import {disableReactDevTools} from '@fvilers/disable-react-devtools';
 
+let environment = "PROD"
+const CLIENT_DEV_URL = "http://localhost:3000";
+const CLIENT_PROD_URL = "https://r-fit-client-deploy.onrender.com";
 
-let envoirment = process.env.ENVOIRMENT;
-const SERVER_URL_DEV = process.env.SERVER_URL_DEV;
-const SERVER_URL_PROD = process.env.SERVER_URL_PROD;
+environment === "DEV" ? CLIENT_DEV_URL : CLIENT_PROD_URL
 
-envoirment === "DEV" ? SERVER_URL_DEV : SERVER_URL_PROD
-// console.log(envoirment)
-// console.log(process.env.REACT_APP_BASE_URL)
-disableReactDevTools();
+disableReactDevTools()
 
 function App() {
   return <RouterProvider router={router} />;

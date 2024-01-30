@@ -11,7 +11,7 @@ export const register = async (user: {
 }) => {
   try {
     if (!user) throw new Error("no data from register in client");
-    const response = await axios.post(`/APIusers/users/register`, { user });
+    const response = await axios.post(`/API/users/register`, { user });
     // const response = await axios.post(`${server}/APIusers/users/register`, { user });
     if (response) return response;
     else return undefined;
@@ -23,7 +23,7 @@ export const register = async (user: {
 export const login = async (userName: string, password: string) => {
   try {
     if (!userName || !password) throw new Error("No data from login in client");
-    return await axios.post("/API/APIusers/login", { userName, password });
+    return await axios.post("/API/users/login", { userName, password });
   } catch (error) {
     console.error(error);
   }
@@ -32,7 +32,7 @@ export const login = async (userName: string, password: string) => {
 export const updateUser = async (id:number, email: string,phone: string,date: string) => {
   try {
     if (!id || !email || !phone || !date) throw new Error("No data from");
-    return await axios.put("/API/APIusers/update", {id, email, phone, date });
+    return await axios.put("/API/users/update", {id, email, phone, date });
   } catch (error) {
     console.error(error);
   }

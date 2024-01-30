@@ -1,2 +1,3 @@
-const url = process.env.CLIENT_PROD_URL 
-export const allowedOrigins = [url];
+const urlPROD = process.env.CLIENT_PROD_URL 
+const urlDEV = process.env.CLIENT_DEV_URL 
+export const allowedOrigins = [urlPROD,urlDEV];

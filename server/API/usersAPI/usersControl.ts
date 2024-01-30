@@ -53,6 +53,7 @@ export async function registerUser(req, res) {
 }
 
 export async function loginUser(req, res) {
+  console.log('Received login request:', req.body);
   try {
     const { userName, password } = req.body;
     if (!userName || !password) throw new Error("No data found in login user");
