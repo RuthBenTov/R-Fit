@@ -5,7 +5,7 @@ import "./scss/signIn.scss";
 import { InputPassword } from "../../components/passwordInput/Password";
 import { useNavigate } from "react-router-dom";
 import AppBarProps from "../../components/appbar/AppBar";
-import { login } from "../../API/userApi";
+import { login } from "../../API/usersApi";
 
 
 
@@ -15,6 +15,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
 
   async function handleSignIn() {
+    console.log("handleSign in:", userName,password)
     try {
       if (!userName || !password) {
         toast.info("Please fill all fileds");

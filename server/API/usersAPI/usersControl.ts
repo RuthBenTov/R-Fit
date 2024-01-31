@@ -56,6 +56,7 @@ export async function loginUser(req, res) {
   console.log('Received login request:', req.body);
   try {
     const { userName, password } = req.body;
+    console.log("server side login user:", userName,password)
     if (!userName || !password) throw new Error("No data found in login user");
 
     const query = `SELECT * FROM r_fit.users WHERE user_name = '${userName}'`;

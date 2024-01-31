@@ -1,7 +1,7 @@
 import axios from "axios";
 let environment = "DEV"
 const CLIENT_DEV_URL = "http://localhost:3000";
-const CLIENT_PROD_URL = "https://r-fit-client-deploy.onrender.com";
+const CLIENT_PROD_URL = "https://r-fit-server-deploy.onrender.com";
 
 // environment === "DEV" ? CLIENT_DEV_URL : CLIENT_PROD_URL
 environment = environment === "DEV" ? CLIENT_DEV_URL : CLIENT_PROD_URL;

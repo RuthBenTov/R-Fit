@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 import "./scss/signUp.scss";
 import AppBarProps from "../../components/appbar/AppBar";
-import { register } from "../../API/userApi";
+import { register } from "../../API/usersApi";
 
 const SignUp = () => {
   const [userName, setUserName] = useState<string>("");
