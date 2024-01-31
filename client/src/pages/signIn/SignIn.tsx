@@ -15,7 +15,6 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
 
   async function handleSignIn() {
-    console.log("handleSign in:", userName,password)
     try {
       if (!userName || !password) {
         toast.info("Please fill all fileds");

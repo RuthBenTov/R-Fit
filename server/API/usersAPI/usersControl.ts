@@ -22,14 +22,14 @@ export async function registerUser(req, res) {
     if (!secret) throw new Error("No secret");
     const hash = await bcrypt.hash(user.password, saltRounds);
 
-    const query = `INSERT INTO r_fit.users (user_name, password, name, date_of_birth, phone_number, email) VALUES ('${user.userName}', '${hash}', '${user.name}', '${user.birthday}', '${user.phone}', '${user.email}');`;
+    const query = `INSERT INTO users (user_name, password, name, date_of_birth, phone_number, email) VALUES ('${user.userName}', '${hash}', '${user.name}', '${user.birthday}', '${user.phone}', '${user.email}');`;
     connection.query(query, (err, resultsAdd) => {
       try {
         if (err) throw err;
         //@ts-ignore
         if (resultsAdd.affectedRows) {
           //@ts-ignore
-          const queryUser = `SELECT * FROM r_fit.users WHERE user_id = ${resultsAdd.insertId}`;
+          const queryUser = `SELECT * FROM users WHERE user_id = ${resultsAdd.insertId}`;
           connection.query(queryUser, (err2, results) => {
             if (err2) throw err2;
             //@ts-ignore
@@ -53,13 +53,11 @@ export async function registerUser(req, res) {
 }
 
 export async function loginUser(req, res) {
-  console.log('Received login request:', req.body);
   try {
     const { userName, password } = req.body;
-    console.log("server side login user:", userName,password)
     if (!userName || !password) throw new Error("No data found in login user");
 
-    const query = `SELECT * FROM r_fit.users WHERE user_name = '${userName}'`;
+    const query = `SELECT * FROM users WHERE user_name = '${userName}'`;
     connection.query(query, async (err, results: User[]) => {
       try {
         if (err) throw err;
@@ -95,7 +93,7 @@ export async function getUserIdFromCookie(req, res) {
     if (!token) throw new Error("no token provided");
     const cookie = jwt.decode(token, secret);
     console.log(cookie);
-    const query = `SELECT * FROM r_fit.users WHERE user_id=${cookie.userID}`;
+    const query = `SELECT * FROM users WHERE user_id=${cookie.userID}`;
     connection.query(query, (err, results: User[]) => {
       try {
         if (err) throw err;
@@ -104,7 +102,6 @@ export async function getUserIdFromCookie(req, res) {
         res.status(500).send({ ok: false, error });
       }
     });
-    // res.send(cookie);
   } catch (error) {
     console.error(error);
   }
@@ -113,7 +110,7 @@ export async function getUserIdFromCookie(req, res) {
 export const getUserEvents = async (req, res) => {
   try {
     const userId = req.query.userId;
-    const query = `SELECT * FROM r_fit.training WHERE user_id = ${userId}`;
+    const query = `SELECT * FROM training WHERE user_id = ${userId}`;
 
     connection.query(query, (err, results) => {
       if (err) throw err;
@@ -133,7 +130,8 @@ export async function updateUser(req, res) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const query = `UPDATE \`r_fit\`.\`users\` SET \`date_of_birth\` = '${date}', \`phone_number\` = '${phone}', \`email\` = '${email}' WHERE (\`user_id\` = ${id})`;
+    const query = `UPDATE \`users\` SET \`date_of_birth\` = '${date}', \`phone_number\` = '${phone}', \`email\` = '${email}' WHERE (\`user_id\` = ${id})`;
+    // const query = `UPDATE \`r_fit\`.\`users\` SET \`date_of_birth\` = '${date}', \`phone_number\` = '${phone}', \`email\` = '${email}' WHERE (\`user_id\` = ${id})`;
 
     connection.query(query, (err, result) => {
       try {
@@ -166,7 +164,7 @@ export async function isAdmin(req, res, next) {
     }
 
     const cookie = jwt.decode(token, secret);
-    const query = `SELECT * FROM r_fit.users WHERE user_id=${cookie.userID}`;
+    const query = `SELECT * FROM users WHERE user_id=${cookie.userID}`;
 
     connection.query(query, (err, results) => {
       try {

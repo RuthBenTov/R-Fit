@@ -5,7 +5,7 @@ export async function addEvent(req, res) {
   try {
     const { eventDb } = req.body;
     console.log(eventDb);
-    const query = `INSERT INTO r_fit.training (training_name, date_time, day, is_regular, name_trainer, program_training_id, duration)  VALUES ("${
+    const query = `INSERT INTO training (training_name, date_time, day, is_regular, name_trainer, program_training_id, duration)  VALUES ("${
       eventDb.trainingName
     }", "${eventDb.date} ${eventDb.timeStart}:00", ${new Date(eventDb.date)
       .getDay()
@@ -36,7 +36,7 @@ export async function addEvent(req, res) {
 }
 export async function getAllEvents(req, res) {
   try {
-    const query = "SELECT * FROM r_fit.training";
+    const query = "SELECT * FROM training";
 
     connection.query(query, (err, result) => {
       try {
@@ -65,7 +65,7 @@ export async function getAllEvents(req, res) {
 export const removeEventByID = async (req, res) => {
   try {
     const eventId = req.params.id;
-    const query = `DELETE FROM r_fit.training WHERE training_id = ${eventId}`;
+    const query = `DELETE FROM training WHERE training_id = ${eventId}`;
     connection.query(query, (err, result) => {
       try {
         if (err) {  
@@ -93,7 +93,7 @@ export const removeEventByID = async (req, res) => {
 
 export async function getEvents(req,res){
   try {
-    const query = "SELECT name_trainer, training_name, date_time FROM r_fit.training";
+    const query = "SELECT name_trainer, training_name, date_time FROM training";
     connection.query(query,(err,results)=>{
       if(err) throw err;
       //@ts-ignore
