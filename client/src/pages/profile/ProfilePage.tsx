@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaPen } from "react-icons/fa6";
 import { IoMdCloseCircle } from "react-icons/io";
-import { getUserFromCookie } from "../../assets/functions";
 import Popup from "./Popup";
 import "./scss/profilePage.scss";
+import { getUserFromCookie } from "../../API/usersApi";
 
 const ProfilePage = () => {
   const [user, setUser] = useState<{
