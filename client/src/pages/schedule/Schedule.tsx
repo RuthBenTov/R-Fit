@@ -12,7 +12,8 @@ import { TbCalendarCog } from "react-icons/tb";
 import Fullcalendar from "../../components/fullcalendar/Fullcalendar";
 import "./scss/schedule.scss";
 import { useNavigate } from "react-router-dom";
-import { getUserFromCookie } from "../../assets/functions";
+import { getUserFromCookie } from "../../API/usersApi";
+// import { getUserFromCookie } from "../../assets/functions";
 
 const Schedule = () => {
   const dispatch = useAppDispatch();

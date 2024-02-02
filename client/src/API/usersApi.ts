@@ -26,7 +26,12 @@ export const register = async (user: {
 export const login = async (userName: string, password: string) => {
   try {
     if (!userName || !password) throw new Error("No data from login in client");
-    return await axios.post(`${environment}/API/users/login`, { userName, password });
+    const {data} = await axios.post(`${environment}/API/users/login`, { userName, password });
+    const {token} = data
+    const tokenStringify = JSON.stringify(token);
+    sessionStorage.setItem("user", tokenStringify);
+
+    // return await axios.post(`${environment}/API/users/login`, { userName, password });
   } catch (error) {
     console.error(error);
   }
@@ -38,5 +43,17 @@ export const updateUser = async (id:number, email: string,phone: string,date: st
     return await axios.put(`${environment}/API/users/update`, {id, email, phone, date });
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const getUserFromCookie = async () => {
+  try {
+    const token = sessionStorage.getItem("user")
+    const { data } = await axios.post("API/users/getUserByCookies", {token});
+    if (!data) throw new Error("Couldn't get user");
+    return data.user;
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 };
