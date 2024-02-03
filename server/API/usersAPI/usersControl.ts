@@ -40,7 +40,7 @@ export async function registerUser(req, res) {
               httpOnly: true,
               maxAge: 1000 * 60 * 60,
             });
-            res.send({ ok: true, results, token });
+            res.send({ ok: true, results});
           });
         }
       } catch (error) {
@@ -71,7 +71,7 @@ export async function loginUser(req, res) {
               httpOnly: true,
               maxAge: 1000 * 60 * 60,
             });
-            res.send({ ok: true, user: { user_id, userName } , token});
+            res.send({ ok: true, user: { user_id, userName }});
           } else {
             res.status(401).send({ ok: false, error: "Invalid credentials" });
           }
@@ -89,8 +89,8 @@ export async function loginUser(req, res) {
 
 export async function getUserIdFromCookie(req, res) {
   try {
-    // const token = req.cookies.user;
-    const {token}= req.body
+    const token = req.cookies.user;
+    // const {token}= req.body
     if (!token) throw new Error("no token provided");
     const cookie = jwt.decode(token, secret);
     console.log(cookie);

@@ -3,7 +3,8 @@ import { FaPen } from "react-icons/fa6";
 import { IoMdCloseCircle } from "react-icons/io";
 import Popup from "./Popup";
 import "./scss/profilePage.scss";
-import { getUserFromCookie } from "../../API/usersApi";
+import { getUserFromCookie } from "../../assets/functions";
+
 
 const ProfilePage = () => {
   const [user, setUser] = useState<{
