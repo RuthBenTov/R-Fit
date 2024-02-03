@@ -1,5 +1,5 @@
 import axios from "axios";
-let environment = "DEV"
+export let environment = "DEV"
 const CLIENT_DEV_URL = "http://localhost:3000";
 const CLIENT_PROD_URL = "https://r-fit-server-deploy.onrender.com";
 
@@ -26,16 +26,25 @@ export const register = async (user: {
 export const login = async (userName: string, password: string) => {
   try {
     if (!userName || !password) throw new Error("No data from login in client");
-    // const {data} = await axios.post(`${environment}/API/users/login`, { userName, password });
-    // const {token} = data
-    // const tokenStringify = JSON.stringify(token);
-    // sessionStorage.setItem("user", tokenStringify);
-
     return await axios.post(`${environment}/API/users/login`, { userName, password });
   } catch (error) {
     console.error(error);
   }
 };
+
+// export const login = async (userName: string, password: string) => {
+//   try {
+//     if (!userName || !password) throw new Error("No data from login in client");
+//     const response = await axios.post(`${environment}/API/users/login`, { userName, password });
+//     if (response && response.data && response.data.user) {
+//       const token = response.data.user.token; // Adjust based on your API response structure
+//       sessionStorage.setItem('user', token);
+//     }
+//     return response;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 export const updateUser = async (id:number, email: string,phone: string,date: string) => {
   try {
@@ -45,6 +54,34 @@ export const updateUser = async (id:number, email: string,phone: string,date: st
     console.error(error);
   }
 };
+
+
+export const getUserFromCookie = async () => {
+  try {
+    const { data } = await axios(`${environment}/API/users/getUserByCookies`,);
+    if (!data) throw new Error("Couldn't get user");
+    return data.user;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+// export const getUserFromStorage = async () => {
+//   try {
+//     const token = sessionStorage.getItem('user');
+//     const { data } = await axios(`${environment}/API/users/getUserByStorage`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     });
+//     if (!data) throw new Error("Couldn't get user");
+//     return data.user;
+//   } catch (error) {
+//     console.error(error);
+//     return null;
+//   }
+// };
 
 // export const getUserFromCookie = async () => {
 //   try {
@@ -57,3 +94,5 @@ export const updateUser = async (id:number, email: string,phone: string,date: st
 //     return null;
 //   }
 // };
+
+

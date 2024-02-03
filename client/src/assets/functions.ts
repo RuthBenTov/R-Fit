@@ -1,5 +1,5 @@
 // import { duration } from "@mui/material";
-import axios from "axios";
+// import axios from "axios";
 // import { users } from "./../../../server/API/Users/usersModel";
 // import { User } from "./../../../server/API/usersAPI/usersModel";
 // import { Cookie } from "@mui/icons-material";
@@ -21,16 +21,7 @@ export const getThisDate = () => {
   return formattedDate;
 };
 
-export const getUserFromCookie = async () => {
-  try {
-    const { data } = await axios("API/users/getUserByCookies");
-    if (!data) throw new Error("Couldn't get user");
-    return data.user;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+
 
 export function calculateEndTime(startTime: string, durationMinutes: number) {
   // Parse the start time into hours and minutes

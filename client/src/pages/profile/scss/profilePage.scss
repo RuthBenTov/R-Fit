@@ -12,6 +12,9 @@
   justify-content: space-around;
   
   .userInfoDiv {
+    height: 65%;
+    width: 35%;
+    text-align: center;
     background-color: #bfbab0;
     border: 1px solid gray;
     border-radius: 10px;
@@ -23,6 +26,11 @@
       height: 150px;
       object-fit: cover;
       margin: 1rem;
+    }
+    .userInfo{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .userInfoItem {
       display: flex;

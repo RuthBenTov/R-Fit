@@ -1,6 +1,7 @@
 import axios  from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { calendarEvent } from './eventModel';
+import { environment } from './usersApi';
 
 export async function addEventDb(eventDb: {
   trainingName: any;
@@ -11,7 +12,7 @@ export async function addEventDb(eventDb: {
   isRecurring: any;
 }) {
   try {
-    const { data } = await axios.post("/API/events/addEvent", { eventDb });
+    const { data } = await axios.post(`${environment}/API/events/addEvent`, { eventDb });
     if (data) return data;
     else throw new Error("Could not add event to DB");
   } catch (error) {
@@ -21,7 +22,7 @@ export async function addEventDb(eventDb: {
 
 export async function getAllEventsDb() {
   try {
-    const { data } = await axios.get("/API/events");
+    const { data } = await axios.get(`${environment}/API/events`);
     if (data) return data;
     else throw new Error("Could not get data from DB");
   } catch (error) {
@@ -31,7 +32,7 @@ export async function getAllEventsDb() {
 
 export async function removeEventByID(id: string) {
   try {
-    const { data } = await axios.delete(`/API/events/removeEventByID/${id}`);
+    const { data } = await axios.delete(`${environment}/API/events/removeEventByID/${id}`);
 
     if (data.status) {
       return true;
@@ -43,12 +44,12 @@ export async function removeEventByID(id: string) {
 
 export const fetchEvents = createAsyncThunk('events/fetchEvents',async()=>{
   try {
-    const {data} = await axios.get("/API/events/getEvents")
+    const {data} = await axios.get(`${environment}/API/events/getEvents`)
     if(!data) throw new Error("No data found in getEvents")
 
     const formattedEvents:calendarEvent[] = data.events.map((event:any)=>({
       title: event.title,
-      start: new Date(event.start)
+      start: new Date(event.start).toISOString()
     }));
 
     return formattedEvents;
